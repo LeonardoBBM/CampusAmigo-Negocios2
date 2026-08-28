@@ -1,84 +1,205 @@
 <!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CampusAmigo</title>
-  <link rel="stylesheet" href="css/styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173f35">
+<meta name="description" content="CampusAmigo: descubre productos, servicios y oportunidades en tu comunidad universitaria. Prototipo académico.">
+<title>CampusAmigo | Tu campus. Más posibilidades.</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-  <header></header>
-
-  <main class="container hero">
-    <div class="promo-banner">
-      <h1>Compra, publica y descubre oportunidades entre estudiantes.</h1>
-      <p>CampusAmigo conecta productos, servicios, subastas y promociones en un solo ecosistema comercial simulado.</p>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-        <a class="btn primary" href="catalogo.html">Comprar</a>
-        <a class="btn" href="publicar.html">Publicar</a>
-        <a class="btn" href="subasta.html">Ir a subasta</a>
-      </div>
-    </div>
-
-    <section style="margin-top:40px">
-      <h2>Escaparate destacado</h2>
-      <p class="small">Una selección visual de productos y servicios para impulsar la conversión.</p>
-      <section id="showcase" class="products" style="margin-top:18px"></section>
-    </section>
-
-    <section style="margin-top:40px">
-      <h2>Promociones activas</h2>
-      <div class="promo-grid" style="margin-top:18px">
-        <div class="promo-card" style="grid-column: span 4">
-          <h3>10% OFF</h3>
-          <p class="small">En electrónica seleccionada esta semana.</p>
-          <span class="badge-code">TEC10</span>
-        </div>
-        <div class="promo-card" style="grid-column: span 4">
-          <h3>2x1</h3>
-          <p class="small">En snacks y postres participantes.</p>
-          <span class="badge-code">DULCE2X1</span>
-        </div>
-        <div class="promo-card" style="grid-column: span 4">
-          <h3>Envío / entrega campus</h3>
-          <p class="small">Promoción visual de entrega coordinada dentro del campus.</p>
-          <a class="btn" href="promociones.html">Ver promociones</a>
-        </div>
-      </div>
-    </section>
-
-    <section style="margin-top:40px">
-      <h2>Comunidad</h2>
-      <p class="small">Opiniones y participación simulada para reforzar la confianza.</p>
-
-      <div class="comment-list" style="margin-top:18px">
-        <div class="comment-item">
-          <div class="comment-head">
-            <b>Ana Martínez</b>
-            <span class="star-row">★★★★★</span>
-          </div>
-          <div class="comment-text">Muy buena experiencia, encontré componentes rápido y la navegación está clara.</div>
-        </div>
-
-        <div class="comment-item">
-          <div class="comment-head">
-            <b>Kevin R.</b>
-            <span class="star-row">★★★★☆</span>
-          </div>
-          <div class="comment-text">La parte de subastas se ve interesante y las promociones le dan más vida al sitio.
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/index_marketing.js"></script>
+<header>
+</header>
+<main id="main-content" class="container">
+<section class="home-hero">
+<div class="hero-copy" data-reveal>
+<span class="eyebrow">
+<span class="status-dot">
+</span> DE ESTUDIANTES, PARA ESTUDIANTES</span>
+<h1>Tu campus.<br>Más <span class="accent-word">posibilidades.</span>
+</h1>
+<p>Eso que necesitas, alguien de tu comunidad lo tiene. Descubre, compra y comparte sin salir del campus.</p>
+<form action="catalogo.html" class="hero-search" role="search">
+<span data-icon="search">
+</span>
+<label class="sr-only" for="home-search">¿Qué estás buscando?</label>
+<input id="home-search" name="q" placeholder="¿Qué estás buscando?" autocomplete="off">
+<button class="btn primary" type="submit">Explorar <span data-icon="arrow">
+</span>
+</button>
+</form>
+<div class="hero-tags">
+<span>Empieza por</span>
+<a href="catalogo.html?cat=electronica">Electrónica ↗</a>
+<a href="catalogo.html?cat=comida">Algo rico ↗</a>
+<a href="catalogo.html?cat=servicio">Servicios ↗</a>
+</div>
+<div class="hero-note">
+<span class="mini-avatars">
+<i>CA</i>
+<i>+</i>
+<i>↗</i>
+</span>
+<span>Las buenas ideas se comparten.<br>
+<b>Y aquí encuentran su lugar.</b>
+</span>
+</div>
+</div>
+<div class="hero-art" data-reveal>
+<div class="orbit orbit-one">
+</div>
+<div class="orbit orbit-two">
+</div>
+<span class="art-word" aria-hidden="true">CREA.</span>
+<div class="floating-note">
+<span data-icon="spark">
+</span> Tu próximo gran proyecto</div>
+<a class="hero-product" href="producto.html?id=p1">
+<div class="hero-product-top">
+<span class="tag new">DESTACADO</span>
+<span class="round-arrow" data-icon="arrow-up">
+</span>
+</div>
+<img src="assets/img/arduino.jpg" alt="Placa Arduino UNO para tus proyectos">
+<div class="hero-product-bottom">
+<div>
+<small>DE LA IDEA A LA REALIDAD</small>
+<h2>Kit Arduino básico</h2>
+</div>
+<b>$450<span> MXN</span>
+</b>
+</div>
+</a>
+<div class="campus-sticker">
+<span data-icon="pin">
+</span>
+<span>Nos vemos<br>
+<b>en el campus.</b>
+</span>
+</div>
+<span class="art-caption">OBJETOS CON POTENCIAL. PERSONAS CON IDEAS.</span>
+</div>
+</section>
+<section class="category-strip" aria-label="Explora por categoría" data-reveal>
+<a href="catalogo.html?cat=electronica">
+<span class="category-icon mint" data-icon="chip">
+</span>
+<span>
+<b>Electrónica</b>
+<small>Ideas que se conectan</small>
+</span>
+<span data-icon="arrow-up">
+</span>
+</a>
+<a href="catalogo.html?cat=servicio">
+<span class="category-icon peach" data-icon="tools">
+</span>
+<span>
+<b>Servicios</b>
+<small>Talento que te ayuda</small>
+</span>
+<span data-icon="arrow-up">
+</span>
+</a>
+<a href="catalogo.html?cat=comida">
+<span class="category-icon yellow" data-icon="coffee">
+</span>
+<span>
+<b>Comida y antojos</b>
+<small>Una pausa bien merecida</small>
+</span>
+<span data-icon="arrow-up">
+</span>
+</a>
+<a href="subasta.html">
+<span class="category-icon lilac" data-icon="bolt">
+</span>
+<span>
+<b>Subastas</b>
+<small>Encuentra tu oportunidad</small>
+</span>
+<span data-icon="arrow-up">
+</span>
+</a>
+</section>
+<section class="home-section" data-reveal>
+<div class="section-heading">
+<div>
+<span class="eyebrow">DESCUBRE ALGO BUENO</span>
+<h2>Un buen hallazgo te espera.</h2>
+</div>
+<a class="text-link" href="catalogo.html">Ver todo el catálogo <span data-icon="arrow">
+</span>
+</a>
+</div>
+<div id="showcase" class="products">
+</div>
+</section>
+<section class="community-banner" data-reveal>
+<div>
+<span class="eyebrow">EL TALENTO TAMBIÉN SE COMPARTE</span>
+<h2>Tu siguiente cliente<br>podría estar en tu salón.</h2>
+<p>Vende lo que creas, ofrece lo que sabes hacer<br class="desktop-only"> y dale una segunda vida a lo que ya no usas.</p>
+<a class="btn lime" href="publicar.html">Publica tu primer producto <span data-icon="arrow">
+</span>
+</a>
+</div>
+<div class="banner-graphic" aria-hidden="true">
+<span class="graphic-ring">
+</span>
+<span class="graphic-star"><svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M120 14V226M14 120H226M45 45L195 195M45 195L195 45" stroke="currentColor" stroke-width="11"/></svg></span>
+<span class="graphic-label">HECHO EN<br>
+<strong>EL CAMPUS.</strong>
+</span>
+<span class="graphic-dot">
+</span>
+</div>
+</section>
+<section class="home-section how-section" data-reveal>
+<div class="section-heading">
+<div>
+<span class="eyebrow">ASÍ DE SIMPLE</span>
+<h2>De encontrarlo a tenerlo.</h2>
+</div>
+<p class="small">Menos vueltas. Más conexiones.</p>
+</div>
+<div class="how-grid">
+<article>
+<span class="step-number">01</span>
+<h3>Encuentra tu favorito</h3>
+<p>Explora productos y servicios de nuestra comunidad.</p>
+</article>
+<article>
+<span class="step-number">02</span>
+<h3>Hazlo tuyo</h3>
+<p>Arma tu carrito y prueba el proceso de compra.</p>
+</article>
+<article>
+<span class="step-number">03</span>
+<h3>Conecta en el campus</h3>
+<p>Descubre una forma más cercana de comprar y vender.</p>
+</article>
+</div>
+</section>
+<section class="bottom-cta" data-reveal>
+<span class="eyebrow">TU COMUNIDAD, MÁS CERCA</span>
+<h2>Lo mejor del campus<br>son las personas.</h2>
+<a href="comunidad.html" class="text-link">Conoce la comunidad <span data-icon="arrow">
+</span>
+</a>
+</section>
+</main>
+<script src="js/data.js">
+</script>
+<script src="js/app.js">
+</script>
+<script src="js/ui.js">
+</script>
+<script src="js/nav.js">
+</script>
+<script src="js/index_marketing.js">
+</script>
 </body>
-
 </html>

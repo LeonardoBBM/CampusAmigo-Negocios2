@@ -1,45 +1,73 @@
 <!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CampusAmigo | Catálogo</title>
-  <link rel="stylesheet" href="css/styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173f35">
+<meta name="description" content="CampusAmigo: descubre productos, servicios y oportunidades en tu comunidad universitaria. Prototipo académico.">
+<title>CampusAmigo | Explora el catálogo</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-  <header>
-  </header>
-
-  <main class="container">
-    <h1>Catálogo</h1>
-    <p class="small">Productos y servicios entre estudiantes.</p>
-
-    <div class="toolbar">
-      <input id="q" class="input" placeholder="Buscar... (ej. arduino, brownies)" />
-      <select id="cat">
-        <option value="all">Todas las categorías</option>
-        <option value="electronica">Electrónica</option>
-        <option value="servicio">Servicios</option>
-        <option value="comida">Comida</option>
-      </select>
-      <select id="sort">
-        <option value="default">Orden: recomendado</option>
-        <option value="price_asc">Precio: menor a mayor</option>
-        <option value="price_desc">Precio: mayor a menor</option>
-      </select>
-      <span class="pill" id="count">0 items</span>
-    </div>
-
-    <section id="list" class="products"></section>
-  </main>
-
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/catalogo.js"></script>
+<header>
+</header>
+<main id="main-content" class="container">
+<div class="page-heading" data-reveal>
+<span class="eyebrow">EL MARKETPLACE DE TU CAMPUS</span>
+<h1>Encuentra tu próximo<br>
+<span class="accent-word">buen hallazgo.</span>
+</h1>
+<p>Productos, servicios y antojos. Todo, un poco más cerca.</p>
+</div>
+<div class="catalog-toolbar">
+<div class="search-field">
+<span data-icon="search">
+</span>
+<label for="q" class="sr-only">Buscar productos</label>
+<input id="q" placeholder="Busca algo que te guste…" class="input">
+</div>
+<label class="sr-only" for="cat">Categoría</label>
+<select id="cat">
+<option value="all">Todas las categorías</option>
+<option value="electronica">Electrónica</option>
+<option value="servicio">Servicios</option>
+<option value="comida">Comida y antojos</option>
+</select>
+<label class="sr-only" for="sort">Ordenar</label>
+<select id="sort">
+<option value="recommended">Recomendados</option>
+<option value="price_asc">Menor precio</option>
+<option value="price_desc">Mayor precio</option>
+</select>
+<button class="btn" id="favoritesOnly" aria-pressed="false">
+<span data-icon="heart">
+</span> Guardados</button>
+</div>
+<div class="catalog-meta">
+<span id="count" role="status">
+</span>
+<span class="small">Precios en MXN · Catálogo de demostración</span>
+</div>
+<section id="list" class="products" aria-label="Productos">
+</section>
+<div id="catalogEmpty" class="empty-state" hidden>
+<span data-icon="search">
+</span>
+<h2>No encontramos coincidencias</h2>
+<p>Prueba con otra palabra o cambia los filtros.</p>
+<button class="btn primary" id="resetFilters">Ver todos los productos</button>
+</div>
+</main>
+<script src="js/data.js">
+</script>
+<script src="js/app.js">
+</script>
+<script src="js/ui.js">
+</script>
+<script src="js/nav.js">
+</script>
+<script src="js/catalogo.js">
+</script>
 </body>
-
 </html>

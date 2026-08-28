@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CampusAmigo | Perfil</title>
   <link rel="stylesheet" href="css/styles.css" />
-</head>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
 
 <body>
   <header></header>
 
-  <main class="container" style="padding-top:24px;padding-bottom:40px">
+  <main id="main-content" class="container" style="padding-top:24px;padding-bottom:40px">
     <section class="promo-banner" style="margin-bottom:24px">
       <div class="row" style="align-items:center; gap:16px; flex-wrap:wrap">
         <div style="flex:1; min-width:260px">
@@ -127,6 +127,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
+<script src="js/ui.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/auth.js"></script>
 
@@ -137,7 +138,7 @@
 
     if (u) {
       // ── Contadores reales ──────────────────────────────
-      const orders   = LS.get("campusamigo_orders", []);
+      const orders = LS.get("campusamigo_orders", []).filter(o => o.buyerId === u.id);
       const products = getProducts().filter(p => p.sellerId === u.id);
 
       document.querySelector("#statCompras").textContent      = orders.length;

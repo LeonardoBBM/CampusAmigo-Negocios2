@@ -1,9 +1,9 @@
 const LS = {
   get(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
+    try { return JSON.parse(localStorage.getItem(key.replace("campusamigo_", "campusamigo_redesign_"))) ?? fallback; }
     catch { return fallback; }
   },
-  set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+  set(key, value) { localStorage.setItem(key.replace("campusamigo_", "campusamigo_redesign_"), JSON.stringify(value)); }
 };
 
 const KEYS = {
@@ -14,7 +14,7 @@ const KEYS = {
   orders:   "campusamigo_orders"
 };
 
-function money(n) { return "$" + Number(n).toFixed(2); }
+function money(n) { return new Intl.NumberFormat("es-MX", {style:"currency", currency:"MXN", minimumFractionDigits:2}).format(Number(n)||0); }
 
 function ensureSeed() {
   const existing = LS.get(KEYS.products, null);
@@ -56,7 +56,7 @@ function setRedirectAfterLogin(url) {
  */
 function _getRedirectAfterLogin() {
   const url = LS.get("campusamigo_redirect", null);
-  localStorage.removeItem("campusamigo_redirect");
+  localStorage.removeItem("campusamigo_redesign_redirect");
   return url;
 }
 
@@ -83,10 +83,10 @@ function updateCartBadge() {
 }
 
 function addToCart(productId, qty) {
-  qty = Math.max(1, Number(qty || 1));
+  qty = Math.max(1, Math.min(99, Math.floor(Number(qty) || 1)));
   const cart = getCart();
   const found = cart.find(i => i.id === productId);
-  if (found) found.qty += qty;
+  if (found) found.qty = Math.min(99, found.qty + qty);
   else cart.push({ id: productId, qty });
   saveCart(cart);
   updateCartBadge();
@@ -97,7 +97,7 @@ function removeFromCart(id) {
 }
 
 function setCartQty(id, qty) {
-  const q = Number(qty);
+  const q = Math.min(99, Math.floor(Number(qty) || 0));
   const cleaned = getCart()
     .map(it => it.id === id ? { ...it, qty: q } : it)
     .filter(it => Number(it.qty) > 0);
@@ -113,11 +113,3 @@ function getParam(name) {
   return new URL(window.location.href).searchParams.get(name);
 }
 
-// Nav toggle (fallback — nav.js lo maneja también)
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.querySelector("#nav-toggle");
-  const nav    = document.querySelector(".nav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => nav.classList.toggle("open"));
-  }
-});

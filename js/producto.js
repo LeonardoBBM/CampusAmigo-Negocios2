@@ -61,7 +61,7 @@ if (!p) {
 
   $("#add").addEventListener("click", () => {
     const qty = Number($("#qty").value || 1);
-    addToCart(p.id, qty);
+    addToCart(p.id, qty); UI.toast("Producto agregado a tu carrito");
 
     $("#msg").hidden = false;
     $("#msg").textContent = `Agregado al carrito: ${qty} x ${p.name}`;
@@ -96,33 +96,5 @@ if (!p) {
     .filter(x => x.category === p.category && x.id !== p.id)
     .slice(0, 3);
 
-  document.querySelector("#rel").innerHTML = rel.map(x => `
-    <article class="card product">
-      <div class="prod-media">
-        ${x.image
-      ? `<img src="${x.image}" alt="${x.name}" onerror="this.parentElement.innerHTML='<div class=&quot;prod-fallback&quot;>Relacionado</div>'">`
-      : `<div class="prod-fallback">Relacionado</div>`
-    }
-      </div>
-
-      <div class="p-body" style="margin-top:10px">
-        <div class="p-tag">
-          ${x.tag ? `<span class="tag ${x.tag === "Nuevo" ? "new" : (x.tag === "Oferta" ? "sale" : "")}">${x.tag}</span>` : ``}
-        </div>
-
-        <h3 class="p-title">${x.name}</h3>
-
-        <div class="p-meta">
-          <span class="small">${x.category}</span>
-          <span class="price">${money(x.price)}</span>
-        </div>
-
-        <hr/>
-
-        <div class="p-actions">
-          <a class="btn" href="producto.html?id=${encodeURIComponent(x.id)}">Ver detalle</a>
-        </div>
-      </div>
-    </article>
-  `).join("") || `<p class="small">No hay relacionados aún.</p>`;
+  document.querySelector("#rel").innerHTML = rel.map(UI.card).join("") || `<p class="small">No hay relacionados aún.</p>`; UI.bindProducts(document.querySelector("#rel"));
 }

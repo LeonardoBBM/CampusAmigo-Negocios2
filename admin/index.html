@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CampusAmigo | Admin</title>
   <link rel="stylesheet" href="../css/styles.css" />
-</head>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"></head>
 
 <body>
   <header></header>
 
-  <main class="container">
+  <main id="main-content" class="container">
     <h1>Panel de administrador</h1>
 
     <div class="grid" style="margin-top:14px">
@@ -31,7 +31,9 @@
 
   <script src="../js/data.js"></script>
   <script src="../js/app.js"></script>
-  <script src="../js/admin_nav.js"></script>
+<script src="../js/ui.js"></script>
+  <script src="../js/admin_guard.js"></script>
+<script src="../js/admin_nav.js"></script>
   <script>
     ensureSeed();
     document.querySelector("#pcount").textContent = getProducts().length;

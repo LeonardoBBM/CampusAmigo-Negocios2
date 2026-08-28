@@ -96,7 +96,7 @@ confirmBtn.addEventListener("click", () => {
     updateCartBadge();
 
     // Limpia draft si existe
-    localStorage.removeItem("campusamigo_checkout_draft");
+    localStorage.removeItem("campusamigo_redesign_checkout_draft");
 
     alert("Pedido creado. Ahora puedes verlo en 'Mis pedidos'.");
     location.href = "index.html";

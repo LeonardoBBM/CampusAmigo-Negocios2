@@ -35,6 +35,8 @@ function getCartItemsDetailed() {
         if (!p) return null;
         return {
             id: p.id,
+            sellerId: p.sellerId || "system",
+            sellerName: p.sellerName || "CampusAmigo",
             name: p.name,
             price: p.price,
             qty: it.qty,
@@ -68,6 +70,7 @@ function renderOrderSummary() {
 }
 
 function renderStep() {
+    [stepPill1,stepPill2,stepPill3].forEach((p,i)=>{ if(i+1===currentStep)p.setAttribute("aria-current","step");else p.removeAttribute("aria-current"); });
     step1.hidden = currentStep !== 1;
     step2.hidden = currentStep !== 2;
     step3.hidden = currentStep !== 3;
@@ -77,7 +80,7 @@ function renderStep() {
     stepPill3.style.opacity = currentStep === 3 ? "1" : ".6";
 
     prevStepBtn.hidden = currentStep === 1;
-    nextStepBtn.textContent = currentStep === 3 ? "Pagar" : "Siguiente";
+    nextStepBtn.textContent = currentStep === 3 ? "Simular pago" : "Siguiente";
 
     if (currentStep === 3) {
         const fullName = document.querySelector("#fullName").value.trim();
@@ -219,6 +222,8 @@ function createOrderAndContinue() {
 
     const order = {
         id: orderId,
+        buyerId: currentUser()?.id || "guest",
+        buyerName: currentUser()?.name || document.querySelector("#fullName").value.trim(),
         folio,
         date: now.toLocaleString(),
         customer: {

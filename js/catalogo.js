@@ -1,103 +1,56 @@
 ensureSeed();
 updateCartBadge();
 
-const list = document.querySelector("#list");
-const q = document.querySelector("#q");
-const cat = document.querySelector("#cat");
-const sort = document.querySelector("#sort");
-const count = document.querySelector("#count");
-
-function productImageHtml(p) {
-  if (p.image) {
-    return `
-      <div class="prod-media">
-        <img src="${p.image}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=&quot;prod-fallback&quot;>CampusAmigo</div>'">
-      </div>
-    `;
-  }
-
-  return `
-    <div class="prod-media">
-      <div class="prod-fallback">CampusAmigo</div>
-    </div>
-  `;
-}
-
-function sellerLabel(p) {
-  if (p.sellerId) {
-    return `<span class="small">Vendedor: ${p.sellerName || "Usuario"}</span>`;
-  }
-  return `<span class="small">Tienda CampusAmigo</span>`;
-}
+const list = document.querySelector('#list');
+const q = document.querySelector('#q');
+const cat = document.querySelector('#cat');
+const sort = document.querySelector('#sort');
+const count = document.querySelector('#count');
+const params = new URLSearchParams(location.search);
+q.value = params.get('q') || '';
+cat.value = ['electronica', 'servicio', 'comida'].includes(params.get('cat'))
+  ? params.get('cat') : 'all';
+let savedOnly = false;
 
 function render() {
   let items = getProducts();
-
-  const term = (q.value || "").trim().toLowerCase();
+  const term = q.value.trim().toLocaleLowerCase('es');
   if (term) {
-    items = items.filter(p =>
-      (p.name || "").toLowerCase().includes(term) ||
-      (p.desc || "").toLowerCase().includes(term) ||
-      (p.sellerName || "").toLowerCase().includes(term)
-    );
+    items = items.filter(p => [p.name, p.desc, p.sellerName]
+      .some(value => (value || '').toLocaleLowerCase('es').includes(term)));
   }
+  if (cat.value !== 'all') items = items.filter(p => p.category === cat.value);
+  if (savedOnly) {
+    const saved = LS.get('campusamigo_favorites', []);
+    items = items.filter(p => saved.includes(p.id));
+  }
+  if (sort.value === 'price_asc') items.sort((a, b) => a.price - b.price);
+  if (sort.value === 'price_desc') items.sort((a, b) => b.price - a.price);
 
-  const c = cat.value;
-  if (c !== "all") items = items.filter(p => p.category === c);
-
-  if (sort.value === "price_asc") items = [...items].sort((a, b) => a.price - b.price);
-  if (sort.value === "price_desc") items = [...items].sort((a, b) => b.price - a.price);
-
-  count.textContent = `${items.length} items`;
-
-  list.innerHTML = items.map(p => {
-    const tagClass = p.tag === "Nuevo" ? "new" : (p.tag === "Oferta" ? "sale" : "");
-    const tagHtml = p.tag ? `<span class="tag ${tagClass}">${p.tag}</span>` : "";
-
-    return `
-      <article class="card product">
-        ${productImageHtml(p)}
-
-        <div class="p-body" style="margin-top:10px">
-          <div class="p-tag">
-            ${tagHtml}
-          </div>
-
-          <h3 class="p-title">${p.name}</h3>
-
-          <div class="p-meta">
-            <span class="small">${p.category}</span>
-            <span class="price">${money(p.price)}</span>
-          </div>
-
-          <div style="margin-top:8px">
-            ${sellerLabel(p)}
-          </div>
-
-          <hr/>
-
-          <div class="p-actions">
-            <a class="btn" href="producto.html?id=${encodeURIComponent(p.id)}">Ver detalle</a>
-            <button class="btn primary" data-add="${p.id}">Agregar</button>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
-
-  document.querySelectorAll("[data-add]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      addToCart(btn.dataset.add, 1);
-      updateCartBadge();
-      btn.textContent = "Agregado ✓";
-      setTimeout(() => btn.textContent = "Agregar", 700);
-    });
-  });
+  const singular = items.length === 1;
+  const noun = singular ? 'hallazgo' : 'hallazgos';
+  const state = savedOnly
+    ? (singular ? 'guardado' : 'guardados')
+    : (singular ? 'disponible' : 'disponibles');
+  count.textContent = `${items.length} ${noun} ${state}`;
+  list.innerHTML = items.map(UI.card).join('');
+  UI.bindProducts(list);
+  document.querySelector('#catalogEmpty').hidden = items.length > 0;
 }
 
-[q, cat, sort].forEach(el => {
-  el.addEventListener("input", render);
-  el.addEventListener("change", render);
+[q, cat, sort].forEach(el => el.addEventListener('input', render));
+document.querySelector('#favoritesOnly').addEventListener('click', event => {
+  savedOnly = !savedOnly;
+  event.currentTarget.setAttribute('aria-pressed', String(savedOnly));
+  render();
 });
-
+document.querySelector('#resetFilters').addEventListener('click', () => {
+  q.value = '';
+  cat.value = 'all';
+  sort.value = 'recommended';
+  savedOnly = false;
+  document.querySelector('#favoritesOnly').setAttribute('aria-pressed', 'false');
+  render();
+});
+document.addEventListener('favoriteschange', () => { if (savedOnly) render(); });
 render();

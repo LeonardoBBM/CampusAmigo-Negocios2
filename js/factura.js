@@ -41,22 +41,22 @@ if (!order || !order.invoice?.requested) {
 } else {
 
   // ── Cálculos fiscales ────────────────────────────────────
-  const subtotal   = order.total;
-  const iva        = calcIVA(subtotal);
-  const total      = subtotal + iva;
+  const subtotal   = Math.round((order.total / 1.16) * 100) / 100;
+  const iva        = Math.round((order.total - subtotal) * 100) / 100;
+  const total      = order.total;
   const folioFisc  = genFolioFiscal(order.invoice.id + order.id);
   const cadenaOrig = `||1.2|${order.invoice.id}|${order.date}|${order.invoice.rfc}|${money(subtotal).replace("$","")}|MXN||`;
 
   invoiceCard.innerHTML = `
 
     <!-- Banda superior de color -->
-    <div style="background:linear-gradient(135deg,#d91d64,#24c8db);height:8px;border-radius:14px 14px 0 0;margin:-16px -16px 0"></div>
+    <div style="background:linear-gradient(135deg,#173f35,#d4ef7d);height:8px;border-radius:14px 14px 0 0;margin:-16px -16px 0"></div>
 
     <!-- Encabezado -->
     <div class="invoice-header" style="margin-top:20px">
       <div>
         <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#d91d64,#24c8db);display:flex;align-items:center;justify-content:center">
+          <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#173f35,#d4ef7d);display:flex;align-items:center;justify-content:center">
             <span style="color:#fff;font-weight:900;font-size:16px">C</span>
           </div>
           <div>
@@ -73,7 +73,7 @@ if (!order || !order.invoice?.requested) {
       <div style="text-align:right">
         <div style="background:#f3f4f6;border-radius:10px;padding:12px 16px;display:inline-block">
           <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px">Comprobante Fiscal</div>
-          <div style="font-size:22px;font-weight:900;color:#d91d64;margin:2px 0">${order.invoice.id}</div>
+          <div style="font-size:22px;font-weight:900;color:#173f35;margin:2px 0">${order.invoice.id}</div>
           <div style="font-size:12px;color:#6b7280">${order.date}</div>
         </div>
       </div>
@@ -103,9 +103,9 @@ if (!order || !order.invoice?.requested) {
     <hr style="border-color:#e5e7eb;margin:18px 0"/>
 
     <!-- Folio fiscal -->
-    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 14px;margin-bottom:18px">
-      <div style="font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px">Folio Fiscal (UUID simulado)</div>
-      <div style="font-size:13px;color:#1e40af;font-family:monospace;margin-top:4px;word-break:break-all">${folioFisc}</div>
+    <div style="background:#e3eee3;border:1px solid #dfe6dc;border-radius:10px;padding:10px 14px;margin-bottom:18px">
+      <div style="font-size:11px;font-weight:700;color:#173f35;text-transform:uppercase;letter-spacing:.5px">Folio Fiscal (UUID simulado)</div>
+      <div style="font-size:13px;color:#173f35;font-family:monospace;margin-top:4px;word-break:break-all">${folioFisc}</div>
     </div>
 
     <!-- Conceptos -->
@@ -144,7 +144,7 @@ if (!order || !order.invoice?.requested) {
           <span>IVA (16%)</span><span>${money(iva)}</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:10px 0;font-weight:900;font-size:18px;color:#111827">
-          <span>Total</span><span style="color:#d91d64">${money(total)}</span>
+          <span>Total</span><span style="color:#173f35">${money(total)}</span>
         </div>
         <div style="font-size:12px;color:#6b7280">Método de pago: ${order.paymentMethod}</div>
         <div style="font-size:12px;color:#6b7280">Pedido: ${order.id} · Folio: ${order.folio}</div>

@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CampusAmigo | Producto</title>
   <link rel="stylesheet" href="css/styles.css" />
-</head>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
 
 <body>
   <header></header>
 
-  <main class="container">
+  <main id="main-content" class="container">
     <a class="pill" href="catalogo.html">← Regresar al catálogo</a>
 
     <div class="grid" style="margin-top:14px">
@@ -39,7 +39,7 @@
 
         <hr />
         <div class="row">
-          <label class="small">Cantidad</label>
+          <label class="small" for="qty">Cantidad</label>
           <input id="qty" class="input" type="number" min="1" value="1" style="width:110px" />
         </div>
 
@@ -80,6 +80,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
+<script src="js/ui.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/producto.js"></script>
 </body>

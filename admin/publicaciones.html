@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CampusAmigo | Gestión de productos</title>
   <link rel="stylesheet" href="../css/styles.css" />
-</head>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"></head>
 
 <body>
   <header></header>
 
-  <main class="container">
+  <main id="main-content" class="container">
     <h1>Gestión de productos</h1>
     <p class="small">CRUD visual del catálogo: agregar, consultar, editar y eliminar productos.</p>
 
@@ -66,17 +66,17 @@
 
       <div class="grid" style="margin-top:10px">
         <div style="grid-column: span 6">
-          <label class="small">Nombre</label>
+          <label class="small" for="fname">Nombre</label>
           <input class="input" id="fname" placeholder="Ej. Kit Arduino avanzado" />
         </div>
 
         <div style="grid-column: span 3">
-          <label class="small">Precio</label>
+          <label class="small" for="fprice">Precio</label>
           <input class="input" id="fprice" type="number" min="1" placeholder="100" />
         </div>
 
         <div style="grid-column: span 3">
-          <label class="small">Categoría</label>
+          <label class="small" for="fcat">Categoría</label>
           <select id="fcat">
             <option value="electronica">Electrónica</option>
             <option value="servicio">Servicio</option>
@@ -85,7 +85,7 @@
         </div>
 
         <div style="grid-column: span 4">
-          <label class="small">Etiqueta</label>
+          <label class="small" for="ftag">Etiqueta</label>
           <select id="ftag">
             <option value="">(ninguna)</option>
             <option value="Nuevo">Nuevo</option>
@@ -94,7 +94,7 @@
         </div>
 
         <div style="grid-column: span 8">
-          <label class="small">Descripción</label>
+          <label class="small" for="fdesc">Descripción</label>
           <input class="input" id="fdesc" placeholder="Descripción corta..." />
         </div>
       </div>
@@ -110,7 +110,9 @@
 
   <script src="../js/data.js"></script>
   <script src="../js/app.js"></script>
-  <script src="../js/admin_nav.js"></script>
+<script src="../js/ui.js"></script>
+  <script src="../js/admin_guard.js"></script>
+<script src="../js/admin_nav.js"></script>
   <script src="../js/admin_moderacion.js"></script>
 </body>
 </html>

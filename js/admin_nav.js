@@ -1,21 +1,12 @@
-// js/admin_nav.js
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector("header");
-  if (!header) return;
-
-  header.innerHTML = `
-    <div class="nav">
-      <div class="brand">
-        <span style="width:12px;height:12px;border-radius:4px;background:var(--accent);display:inline-block"></span>
-        <a href="../index.html">CampusAmigo</a>
-        <span class="badge">admin</span>
-      </div>
-
-      <nav class="links">
-        <a href="index.html">Inicio</a>
-        <a href="publicaciones.html">Productos</a>
-        <a href="../catalogo.html">Ver sitio</a>
-      </nav>
-    </div>
-  `;
+document.addEventListener('DOMContentLoaded',()=>{
+ const header=document.querySelector('header');if(!header)return;
+ const admin=location.pathname.includes('/admin/'),prefix=admin?'../':'',u=currentUser(),e=UI.escape;
+ const link=(href,label)=>'<a href="'+href+'"'+(location.pathname.endsWith('/'+href)?' aria-current="page"':'')+'>'+label+'</a>';
+ header.innerHTML='<div class="nav"><a class="brand" href="'+prefix+'index.html"><span class="brand-mark">ca.</span>campusamigo</a><button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-panel">'+UI.icon('menu')+'</button><div class="nav-panel" id="nav-panel"><nav class="links" aria-label="Navegación principal">'+(admin?link('index.html','Panel')+link('publicaciones.html','Productos')+link('../index.html','Ver sitio'):link('catalogo.html','Explorar')+link('subasta.html','Subastas')+link('comunidad.html','Comunidad')+'<details class="nav-more"><summary>Descubre '+UI.icon('chevron')+'</summary><div class="nav-more-menu">'+link('promociones.html','Promociones')+link('escaparate.html','Escaparate')+link('nosotros.html','Nosotros')+link('contacto.html','Contacto')+(u?link('mis_pedidos.html','Mis pedidos')+link('mis_publicaciones.html','Mis publicaciones'):'')+(u?.role==='admin'?link('admin/index.html','Administración'):'')+'</div></details>')+'</nav><div class="actions"><a class="nav-cart" href="'+prefix+'carrito.html" aria-label="Ver carrito">'+UI.icon('bag')+'<b data-cart-count>0</b></a>'+(u?'<a class="nav-user" href="'+prefix+'perfil.html"><span class="avatar">'+e(u.name.slice(0,2).toUpperCase())+'</span>'+e(u.name.split(' ')[0])+'</a><button class="nav-logout" id="nav-logout" aria-label="Cerrar sesión">'+UI.icon('exit')+'</button>':'<a class="btn" href="'+prefix+'login.html">Ingresar</a>')+'<a class="btn primary" href="'+prefix+'publicar.html">'+UI.icon('plus')+' Publicar</a></div></div></div>';
+ const toggle=header.querySelector('#nav-toggle'),nav=header.querySelector('.nav');
+ const close=()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menú');toggle.innerHTML=UI.icon('menu');};
+ toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');toggle.innerHTML=UI.icon(open?'close':'menu');});
+ document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){header.querySelectorAll('details[open]').forEach(d=>d.open=false);close();}});
+ document.addEventListener('click',ev=>{if(!ev.composedPath().includes(header)){header.querySelectorAll('details[open]').forEach(d=>d.open=false);close();}});
+ document.querySelector('#nav-logout')?.addEventListener('click',()=>{LS.set(KEYS.session,null);location.href=prefix+'index.html';});updateCartBadge();
 });

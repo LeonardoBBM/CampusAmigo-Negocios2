@@ -61,4 +61,4 @@ function render() {
   });
 }
 
-render();
+if (u) render();
