@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusAmigo | Login</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header></header>
+
+  <main class="container auth-wrap">
+    <section class="card auth-card">
+      <div class="auth-head">
+        <h1>Iniciar sesión</h1>
+        <p>Accede para publicar, acordar entregas y gestionar tu carrito.</p>
+      </div>
+
+      <div id="msg" class="notice danger" hidden></div>
+
+      <div class="auth-form">
+        <div class="field">
+          <label for="email">Correo</label>
+          <input id="email" class="input" type="email" placeholder="alguien@tec.mx" autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="pass">Contraseña</label>
+          <input id="pass" class="input" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+
+        <div class="auth-actions">
+          <button id="btn" class="btn primary block" type="button">Entrar</button>
+          <div class="row">
+            <span class="small">¿No tienes cuenta?</span>
+            <a class="pill" href="registro.html">Regístrate</a>
+          </div>
+        </div>
+
+        <div class="hint">
+          <b>Admin:</b> correo <code>admin@admin.com</code> • contraseña <code>123</code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

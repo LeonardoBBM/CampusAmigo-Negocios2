@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CampusAmigo | Checkout</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <header></header>
+
+    <main class="container">
+        <div class="auth-head" style="margin-top:10px">
+            <h1>Checkout</h1>
+            <p>Completa tu compra con dirección, método de pago y confirmación final.</p>
+        </div>
+
+        <div class="grid" style="margin-top:16px">
+            <section class="card" style="grid-column: span 8">
+                <div class="row" style="gap:10px; flex-wrap:wrap">
+                    <span class="pill" id="stepPill1">Paso 1: Dirección</span>
+                    <span class="pill" id="stepPill2">Paso 2: Pago</span>
+                    <span class="pill" id="stepPill3">Paso 3: Confirmación</span>
+                </div>
+
+                <!-- Paso 1 -->
+                <section id="step1" style="margin-top:18px">
+                    <h3>Dirección de entrega</h3>
+                    <div class="auth-form">
+                        <div class="field">
+                            <label for="fullName">Nombre completo</label>
+                            <input id="fullName" class="input" type="text" placeholder="Ej. Leonardo Becerra" />
+                        </div>
+
+                        <div class="field">
+                            <label for="street">Dirección</label>
+                            <input id="street" class="input" type="text" placeholder="Ej. Calle Universidad 123" />
+                        </div>
+
+                        <div class="grid">
+                            <div style="grid-column: span 6">
+                                <label class="small" for="city">Ciudad</label>
+                                <input id="city" class="input" type="text" placeholder="Ej. Aguascalientes" />
+                            </div>
+                            <div style="grid-column: span 6">
+                                <label class="small" for="zip">Código postal</label>
+                                <input id="zip" class="input" type="text" placeholder="Ej. 20000" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Paso 2 -->
+                <section id="step2" style="margin-top:18px" hidden>
+                    <h3>Método de pago</h3>
+
+                    <div class="auth-form">
+                        <div class="field">
+                            <label for="paymentMethod">Selecciona una opción</label>
+                            <select id="paymentMethod">
+                                <option value="card">Tarjeta</option>
+                                <option value="transfer">Transferencia</option>
+                                <option value="wallet">E-wallet</option>
+                            </select>
+                        </div>
+
+                        <div id="cardFields">
+                            <div class="field">
+                                <label for="cardName">Nombre en la tarjeta</label>
+                                <input id="cardName" class="input" type="text" placeholder="Ej. Leonardo Becerra" />
+                            </div>
+
+                            <div class="field">
+                                <label for="cardNumber">Número de tarjeta</label>
+                                <input id="cardNumber" class="input" type="text" placeholder="4111 1111 1111 1111" />
+                            </div>
+
+                            <div class="grid">
+                                <div style="grid-column: span 6">
+                                    <label class="small" for="cardDate">Fecha</label>
+                                    <input id="cardDate" class="input" type="text" placeholder="12/28" />
+                                </div>
+                                <div style="grid-column: span 6">
+                                    <label class="small" for="cardCvv">CVV</label>
+                                    <input id="cardCvv" class="input" type="text" placeholder="123" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="transferFields" hidden>
+                            <div class="notice">
+                                <b>Transferencia bancaria</b><br />
+                                Banco: Banco Demo<br />
+                                CLABE: 012345678901234567<br />
+                                Referencia: CAMPUS-2026
+                            </div>
+                        </div>
+
+                        <div id="walletFields" hidden>
+                            <div class="notice">
+                                <b>E-wallet</b><br />
+                                Saldo disponible: $2,500.00<br />
+                                Método listo para validación simulada.
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="field">
+                            <label class="invoice-toggle">
+                                <input id="wantsInvoice" type="checkbox" />
+                                Quiero facturar mi compra
+                            </label>
+                            <p class="small" style="margin:4px 0 0">Podrás ver, descargar o enviar la factura al finalizar el pedido.</p>
+                        </div>
+
+                        <div id="invoiceFields" class="invoice-box" hidden>
+                            <h3 style="margin-top:0">Datos de facturación</h3>
+                            <div class="grid">
+                                <div style="grid-column: span 6">
+                                    <label class="small" for="invoiceRfc">RFC</label>
+                                    <input id="invoiceRfc" class="input" type="text" placeholder="Ej. BEML010101ABC" />
+                                </div>
+                                <div style="grid-column: span 6">
+                                    <label class="small" for="invoiceEmail">Correo</label>
+                                    <input id="invoiceEmail" class="input" type="email" placeholder="correo@ejemplo.com" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="invoiceName">Razón social / Nombre fiscal</label>
+                                <input id="invoiceName" class="input" type="text" placeholder="Ej. Leonardo Becerra Morales" />
+                            </div>
+                            <div class="grid">
+                                <div style="grid-column: span 6">
+                                    <label class="small" for="invoiceUse">Uso CFDI</label>
+                                    <select id="invoiceUse">
+                                        <option value="G03 - Gastos en general">G03 - Gastos en general</option>
+                                        <option value="P01 - Por definir">P01 - Por definir</option>
+                                        <option value="D01 - Honorarios médicos">D01 - Honorarios médicos</option>
+                                    </select>
+                                </div>
+                                <div style="grid-column: span 6">
+                                    <label class="small" for="invoiceRegime">Régimen fiscal</label>
+                                    <select id="invoiceRegime">
+                                        <option value="616 - Sin obligaciones fiscales">616 - Sin obligaciones fiscales</option>
+                                        <option value="605 - Sueldos y salarios">605 - Sueldos y salarios</option>
+                                        <option value="612 - Personas físicas con actividad empresarial">612 - Actividad empresarial</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Paso 3 -->
+                <section id="step3" style="margin-top:18px" hidden>
+                    <h3>Confirmación</h3>
+                    <div class="notice">
+                        Revisa tu pedido y confirma el pago.
+                    </div>
+
+                    <div id="checkoutSummary" style="margin-top:14px"></div>
+                </section>
+
+                <div id="checkoutMsg" class="notice" hidden style="margin-top:14px"></div>
+
+                <div class="checkout-actions" style="margin-top:18px">
+                    <button id="prevStep" class="btn" type="button">Anterior</button>
+                    <button id="nextStep" class="btn primary" type="button">Siguiente</button>
+                </div>
+            </section>
+
+            <aside class="card" style="grid-column: span 4">
+                <h3>Resumen de compra</h3>
+                <div id="orderSummary"></div>
+                <hr />
+                <div class="row"><span class="small">Total</span><b id="orderTotal">$0.00</b></div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+
+</html>

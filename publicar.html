@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CampusAmigo | Publicar</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <header></header>
+
+    <main class="container auth-wrap">
+        <section class="card auth-card" style="width:min(700px,100%)">
+            <div class="auth-head">
+                <h1>Publicar producto</h1>
+            </div>
+
+            <div id="msg" class="notice" hidden></div>
+
+            <div class="auth-form">
+                <div class="field">
+                    <label for="seller">Tu nombre</label>
+                    <input id="seller" class="input" type="text" placeholder="Ej. Leo" />
+                </div>
+
+                <div class="field">
+                    <label for="name">Nombre del producto</label>
+                    <input id="name" class="input" type="text" placeholder="Ej. Mouse inalámbrico" />
+                </div>
+
+                <div class="field">
+                    <label for="price">Precio</label>
+                    <input id="price" class="input" type="number" min="1" placeholder="250" />
+                </div>
+
+                <div class="field">
+                    <label for="cat">Categoría</label>
+                    <select id="cat">
+                        <option value="electronica">Electrónica</option>
+                        <option value="servicio">Servicio</option>
+                        <option value="comida">Comida</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="tag">Etiqueta</label>
+                    <select id="tag">
+                        <option value="">(ninguna)</option>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="Oferta">Oferta</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="desc">Descripción</label>
+                    <textarea id="desc" class="input" rows="4" placeholder="Describe el producto..."></textarea>
+                </div>
+
+                <div class="field">
+                    <label for="image">Ruta de imagen (opcional)</label>
+                    <input id="image" class="input" type="text" placeholder="Ej. assets/img/mouse.jpg" />
+                </div>
+
+                <button id="save" class="btn primary block" type="button">Publicar</button>
+            </div>
+
+            <div class="auth-footer">
+                Al publicar, el producto aparecerá en el catálogo como publicación de usuario.
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/publicar.js"></script>
+</body>
+
+</html>

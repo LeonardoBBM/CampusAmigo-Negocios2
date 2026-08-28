@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusAmigo | Producto</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header></header>
+
+  <main class="container">
+    <a class="pill" href="catalogo.html">← Regresar al catálogo</a>
+
+    <div class="grid" style="margin-top:14px">
+      <section class="card" style="grid-column: span 7">
+        <div class="prod-media" id="productMedia" style="height:260px">
+          <div class="prod-fallback">Detalle</div>
+        </div>
+      </section>
+
+      <section class="card" style="grid-column: span 5">
+        <div id="tag"></div>
+        <h1 id="name" style="margin:8px 0 8px">—</h1>
+
+        <div class="row">
+          <span class="pill" id="cat">—</span>
+          <span class="price" id="price">$0.00</span>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <span class="small">Vendedor</span>
+          <b id="seller">—</b>
+        </div>
+
+        <p class="small" id="desc" style="margin-top:12px">—</p>
+
+        <hr />
+        <div class="row">
+          <label class="small">Cantidad</label>
+          <input id="qty" class="input" type="number" min="1" value="1" style="width:110px" />
+        </div>
+
+        <div class="row" style="margin-top:12px; gap:10px; flex-wrap:wrap">
+          <button id="add" class="btn primary">Agregar al carrito</button>
+          <a class="btn" href="carrito.html">Ver carrito</a>
+        </div>
+
+        <div id="msg" style="margin-top:12px" class="notice" hidden></div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:24px">
+      <h2>Comentarios de la comunidad</h2>
+      <p class="small">Participación simulada para reforzar la confianza del ecosistema.</p>
+
+      <div class="auth-form" style="margin-top:14px">
+        <div class="field">
+          <label for="commentUser">Nombre</label>
+          <input id="commentUser" class="input" type="text" placeholder="Ej. Leo" />
+        </div>
+
+        <div class="field">
+          <label for="commentText">Comentario</label>
+          <textarea id="commentText" class="input" rows="3" placeholder="Escribe tu comentario..."></textarea>
+        </div>
+
+        <button id="commentBtn" class="btn primary" type="button">Publicar comentario</button>
+      </div>
+
+      <div id="commentMsg" class="notice" hidden style="margin-top:12px"></div>
+      <div id="commentList" class="comment-list"></div>
+    </section>
+
+    <h2 style="margin-top:24px">Productos relacionados</h2>
+    <section id="rel" class="products"></section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/producto.js"></script>
+</body>
+
+</html>

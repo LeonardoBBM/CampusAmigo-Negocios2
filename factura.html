@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusAmigo | Factura</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header></header>
+
+  <main class="container">
+    <div class="auth-head" style="margin-top:10px">
+      <h1>Factura</h1>
+      <p>Comprobante fiscal digital simulado del pedido.</p>
+    </div>
+
+    <section class="card invoice-document" id="invoiceCard" style="margin-top:18px; overflow:hidden"></section>
+
+    <div class="checkout-actions" style="margin-top:18px;flex-wrap:wrap">
+      <a class="btn" href="perfil.html">← Volver al perfil</a>
+      <a class="btn" href="ticket.html" id="linkTicket">Ver ticket</a>
+      <button class="btn primary" id="printInvoice" type="button">⬇️ Descargar factura</button>
+    </div>
+
+    <div id="downloadMsg" class="notice" hidden style="margin-top:12px"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/factura.js"></script>
+
+  <script>
+    // Pasar el id al link de ticket también
+    const id = new URLSearchParams(location.search).get("id");
+    if (id) {
+      const lt = document.querySelector("#linkTicket");
+      if (lt) lt.href = `ticket.html?id=${encodeURIComponent(id)}`;
+    }
+  </script>
+</body>
+
+</html>

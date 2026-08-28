@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CampusAmigo | Comunidad</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <header></header>
+
+    <main class="container">
+        <div class="auth-head" style="margin-top:10px">
+            <h1>Comunidad</h1>
+            <p>Se parte de nuestra comunidad! <br>Danos consejos para mejorar nuestro sitio.</p>
+        </div>
+
+        <section class="card" style="margin-top:18px">
+            <h3>Agregar comentario</h3>
+
+            <div class="auth-form" style="margin-top:14px">
+                <div class="field">
+                    <label for="communityUser">Nombre</label>
+                    <input id="communityUser" class="input" type="text" placeholder="Ej. Leo" />
+                </div>
+
+                <div class="field">
+                    <label for="communityText">Comentario</label>
+                    <textarea id="communityText" class="input" rows="4" placeholder="Escribe tu opinión..."></textarea>
+                </div>
+
+                <button id="communityBtn" class="btn primary block" type="button">Publicar comentario</button>
+            </div>
+
+            <div id="communityMsg" class="notice" hidden style="margin-top:12px"></div>
+        </section>
+
+        <section class="card" style="margin-top:18px">
+            <h3>Comentarios recientes</h3>
+
+            <div class="comment-list" style="margin-top:14px">
+                <div class="comment-item">
+                    <div class="comment-head">
+                        <b>Ana Martínez</b>
+                        <span class="star-row">★★★★★</span>
+                    </div>
+                    <div class="comment-text">Me gustó mucho la idea del sitio, se ve más completo con promociones y
+                        subasta.</div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-head">
+                        <b>Kevin R.</b>
+                        <span class="star-row">★★★★☆</span>
+                    </div>
+                    <div class="comment-text">El catálogo está claro y los productos destacados llaman la atención.
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-head">
+                        <b>Samuel J.</b>
+                        <span class="star-row">★★★☆☆</span>
+                    </div>
+                    <div class="comment-text">Me gusta.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/comunidad.js"></script>
+</body>
+
+</html>

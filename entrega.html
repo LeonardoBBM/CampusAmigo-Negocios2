@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CampusAmigo | Entrega</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <header></header>
+
+    <main class="container">
+        <h1>Acordar entrega</h1>
+        <p class="small">Elige un punto y horario. Esto crea tu pedido (sin pago real).</p>
+
+        <div class="grid" style="margin-top:14px">
+            <section class="card" style="grid-column: span 7">
+                <h3>Detalles de entrega</h3>
+
+                <div class="grid" style="margin-top:12px">
+                    <div style="grid-column: span 12">
+                        <label class="small">Punto de entrega</label>
+                        <select id="point">
+                            <option value="Biblioteca">Biblioteca</option>
+                            <option value="Cafetería">Cafetería</option>
+                            <option value="Entrada principal">Entrada principal</option>
+                            <option value="Edificio de Sistemas">Edificio de Sistemas</option>
+                            <option value="Otro">Otro (especificar)</option>
+                        </select>
+                    </div>
+
+                    <div id="otherWrap" style="grid-column: span 12; display:none">
+                        <label class="small">Especifica el punto</label>
+                        <input id="otherPoint" class="input" placeholder="Ej. Frente a laboratorios, puerta 2" />
+                    </div>
+
+                    <div style="grid-column: span 6">
+                        <label class="small">Fecha</label>
+                        <input id="date" class="input" type="date" />
+                    </div>
+
+                    <div style="grid-column: span 6">
+                        <label class="small">Hora</label>
+                        <input id="time" class="input" type="time" />
+                    </div>
+
+                    <div style="grid-column: span 12">
+                        <label class="small">Notas (opcional)</label>
+                        <input id="note" class="input"
+                            placeholder="Ej. Llego 10 min tarde, mándame mensaje al llegar." />
+                    </div>
+                </div>
+
+                <div id="msg" class="notice" hidden style="margin-top:12px"></div>
+
+                <div class="checkout-actions" style="margin-top:14px">
+                    <a class="btn" href="carrito.html">Volver</a>
+                    <button id="confirm" class="btn primary" type="button">Confirmar pedido</button>
+                </div>
+            </section>
+
+            <aside class="card" style="grid-column: span 5">
+                <h3>Resumen</h3>
+                <div id="summary"></div>
+                <hr />
+                <div class="row"><span class="small">Total</span><b id="total">$0.00</b></div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/entrega.js"></script>
+</body>
+
+</html>

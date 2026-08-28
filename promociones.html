@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CampusAmigo | Promociones</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <header></header>
+
+    <main class="container">
+        <div class="auth-head" style="margin-top:10px">
+            <h1>Promociones activas</h1>
+            <p>Marketing visual del ecosistema comercial: descuentos, escaparates y campañas temporales.</p>
+        </div>
+
+        <section class="promo-grid" style="margin-top:18px">
+            <div class="promo-card" style="grid-column: span 6">
+                <h3>Semana Tech</h3>
+                <p class="small">10% de descuento en electrónica seleccionada.</p>
+                <div class="badge-code" style="margin-top:10px">TEC10</div>
+            </div>
+
+            <div class="promo-card" style="grid-column: span 6">
+                <h3>Dulce 2x1</h3>
+                <p class="small">Promoción para snacks y brownies.</p>
+                <div class="badge-code" style="margin-top:10px">DULCE2X1</div>
+            </div>
+
+            <div class="promo-card" style="grid-column: span 12">
+                <h3>Aplicar código promocional</h3>
+                <p class="small">Interacción demostrativa, no funcional.</p>
+
+                <div class="row" style="margin-top:12px; gap:10px; flex-wrap:wrap">
+                    <input id="promoCode" class="input" placeholder="Escribe tu código promocional" style="flex:1" />
+                    <button id="applyPromo" class="btn primary" type="button">Aplicar</button>
+                </div>
+
+                <div id="promoMsg" class="notice" hidden style="margin-top:12px"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/promociones.js"></script>
+</body>
+
+</html>

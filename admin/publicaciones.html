@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusAmigo | Gestión de productos</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+
+<body>
+  <header></header>
+
+  <main class="container">
+    <h1>Gestión de productos</h1>
+    <p class="small">CRUD visual del catálogo: agregar, consultar, editar y eliminar productos.</p>
+
+    <div class="card" style="margin-top:14px">
+      <div class="toolbar" style="justify-content:space-between">
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <input id="q" class="input" placeholder="Buscar... (nombre, vendedor, categoría)" />
+
+          <select id="type">
+            <option value="all">Todo</option>
+            <option value="seed">Seed</option>
+            <option value="user">Usuarios</option>
+          </select>
+
+          <select id="cat">
+            <option value="all">Todas las categorías</option>
+            <option value="electronica">Electrónica</option>
+            <option value="servicio">Servicios</option>
+            <option value="comida">Comida</option>
+          </select>
+
+          <select id="sort">
+            <option value="recent">Orden: más recientes</option>
+            <option value="price_asc">Precio: menor a mayor</option>
+            <option value="price_desc">Precio: mayor a menor</option>
+            <option value="name_asc">Nombre: A-Z</option>
+          </select>
+
+          <span class="pill" id="count">0 items</span>
+        </div>
+
+        <button class="btn primary" id="add" type="button">+ Agregar producto</button>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Tipo</th>
+            <th>Categoría</th>
+            <th class="right">Precio</th>
+            <th>Vendedor</th>
+            <th class="right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <!-- Formulario CRUD -->
+    <div class="card" id="formCard" style="margin-top:14px" hidden>
+      <h3 id="formTitle">Agregar producto</h3>
+
+      <div class="grid" style="margin-top:10px">
+        <div style="grid-column: span 6">
+          <label class="small">Nombre</label>
+          <input class="input" id="fname" placeholder="Ej. Kit Arduino avanzado" />
+        </div>
+
+        <div style="grid-column: span 3">
+          <label class="small">Precio</label>
+          <input class="input" id="fprice" type="number" min="1" placeholder="100" />
+        </div>
+
+        <div style="grid-column: span 3">
+          <label class="small">Categoría</label>
+          <select id="fcat">
+            <option value="electronica">Electrónica</option>
+            <option value="servicio">Servicio</option>
+            <option value="comida">Comida</option>
+          </select>
+        </div>
+
+        <div style="grid-column: span 4">
+          <label class="small">Etiqueta</label>
+          <select id="ftag">
+            <option value="">(ninguna)</option>
+            <option value="Nuevo">Nuevo</option>
+            <option value="Oferta">Oferta</option>
+          </select>
+        </div>
+
+        <div style="grid-column: span 8">
+          <label class="small">Descripción</label>
+          <input class="input" id="fdesc" placeholder="Descripción corta..." />
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:14px">
+        <button class="btn" id="cancel" type="button">Cancelar</button>
+        <button class="btn primary" id="save" type="button">Guardar</button>
+      </div>
+
+      <div id="ok" class="notice" hidden style="margin-top:12px">Guardado.</div>
+    </div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/admin_nav.js"></script>
+  <script src="../js/admin_moderacion.js"></script>
+</body>
+</html>

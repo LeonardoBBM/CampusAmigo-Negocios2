@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusAmigo | Perfil</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header></header>
+
+  <main class="container" style="padding-top:24px;padding-bottom:40px">
+    <section class="promo-banner" style="margin-bottom:24px">
+      <div class="row" style="align-items:center; gap:16px; flex-wrap:wrap">
+        <div style="flex:1; min-width:260px">
+          <span class="tag new">Perfil de usuario</span>
+          <h1 style="margin:10px 0 8px">Mi espacio</h1>
+          <p class="small" style="margin:0; max-width:720px">
+            Aquí puedes visualizar tu información, tus publicaciones y el historial de compras.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <span class="badge-code">Compras</span>
+          <span class="badge-code">Ventas</span>
+          <span class="badge-code">Actividad</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="loggedOut" class="notice danger" hidden>
+      No has iniciado sesión. <a href="login.html"><b>Ir a Login</b></a>
+    </div>
+
+    <div id="loggedIn" hidden>
+
+      <!-- mini resumen -->
+      <section class="grid" style="margin-bottom:18px">
+        <div class="card" style="grid-column: span 4">
+          <h3 style="margin-bottom:6px">Compras</h3>
+          <p class="small" style="margin:0">Total: <b id="statCompras">0</b></p>
+        </div>
+        <div class="card" style="grid-column: span 4">
+          <h3 style="margin-bottom:6px">Publicaciones activas</h3>
+          <p class="small" style="margin:0">Total: <b id="statPublicaciones">0</b></p>
+        </div>
+        <div class="card" style="grid-column: span 4">
+          <h3 style="margin-bottom:6px">Estado general</h3>
+          <p class="small" style="margin:0"><b>Usuario activo</b></p>
+        </div>
+      </section>
+
+      <!-- fila superior -->
+      <section class="grid">
+        <!-- Mis datos -->
+        <section class="card" style="grid-column: span 6">
+          <h3>Mis datos</h3>
+          <hr />
+          <div class="row">
+            <span class="small">Nombre</span>
+            <b id="pName">—</b>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <span class="small">Correo</span>
+            <b id="pEmail">—</b>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <span class="small">Rol</span>
+            <b id="pRole">Usuario</b>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+            <a class="btn primary" href="publicar.html">Agregar publicación</a>
+            <a class="btn" href="mis_publicaciones.html">Mis publicaciones</a>
+          </div>
+          <div style="margin-top:18px">
+            <button id="logout" class="btn">Cerrar sesión</button>
+          </div>
+        </section>
+
+        <!-- Mis productos recientes -->
+        <section class="card" style="grid-column: span 6">
+          <h3>Mis publicaciones recientes</h3>
+          <hr />
+          <div class="comment-list" id="misProductosPreview">
+            <p class="small">Sin publicaciones aún.</p>
+          </div>
+          <div style="margin-top:12px">
+            <a class="btn" href="mis_publicaciones.html">Ver historial completo</a>
+          </div>
+        </section>
+      </section>
+
+      <!-- Historial de compras -->
+      <section class="card" style="margin-top:18px">
+        <div class="row" style="align-items:end; flex-wrap:wrap">
+          <div>
+            <h3 style="margin-bottom:6px">Historial de compras</h3>
+            <p class="small" style="margin:0">Compras realizadas dentro del ecosistema de CampusAmigo.</p>
+          </div>
+          <span class="pill">Últimos movimientos</span>
+        </div>
+
+        <hr />
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Fecha</th>
+              <th class="right">Total</th>
+              <th>Estado</th>
+              <th class="right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="profileOrdersRows">
+            <tr>
+              <td colspan="5" class="small">No hay compras registradas aún.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    renderProfile();
+
+    const u = currentUser();
+
+    if (u) {
+      // ── Contadores reales ──────────────────────────────
+      const orders   = LS.get("campusamigo_orders", []);
+      const products = getProducts().filter(p => p.sellerId === u.id);
+
+      document.querySelector("#statCompras").textContent      = orders.length;
+      document.querySelector("#statPublicaciones").textContent = products.length;
+
+      // ── Publicaciones recientes ────────────────────────
+      const preview = document.querySelector("#misProductosPreview");
+      if (products.length) {
+        preview.innerHTML = products.slice(0, 3).map(p => `
+          <div class="comment-item">
+            <div class="comment-head">
+              <b>${p.name}</b>
+              <span class="tag new">Publicado</span>
+            </div>
+            <div class="comment-text">
+              ${p.category} · ${money(p.price)}
+            </div>
+          </div>
+        `).join("");
+      }
+
+      // ── Historial de compras con botón factura ─────────
+      const rows = document.querySelector("#profileOrdersRows");
+      if (rows && orders.length) {
+        rows.innerHTML = orders.map(order => {
+          const nombre = order.items?.[0]?.name || "Pedido";
+          const tieneFactura = order.invoice?.requested;
+
+          const acciones = `
+            <a class="btn" href="ticket.html?id=${encodeURIComponent(order.id)}" style="font-size:13px">
+              🧾 Ticket
+            </a>
+            ${tieneFactura
+              ? `<a class="btn primary" href="factura.html?id=${encodeURIComponent(order.id)}" style="font-size:13px">
+                   📄 Factura
+                 </a>`
+              : `<span class="small" style="color:var(--muted)">Sin factura</span>`
+            }
+          `;
+
+          return `
+            <tr>
+              <td><b>${nombre}</b>${order.items?.length > 1 ? `<div class="small">+${order.items.length - 1} más</div>` : ""}</td>
+              <td>${order.date}</td>
+              <td class="right"><b>${money(order.total)}</b></td>
+              <td><span class="tag new">${order.status}</span></td>
+              <td class="right" style="display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap">
+                ${acciones}
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+    }
+  </script>
+</body>
+
+</html>
