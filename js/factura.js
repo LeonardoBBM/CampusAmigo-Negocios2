@@ -104,7 +104,7 @@ if (!order || !order.invoice?.requested) {
 
     <!-- Folio fiscal -->
     <div style="background:#e3eee3;border:1px solid #dfe6dc;border-radius:10px;padding:10px 14px;margin-bottom:18px">
-      <div style="font-size:11px;font-weight:700;color:#173f35;text-transform:uppercase;letter-spacing:.5px">Folio Fiscal (UUID simulado)</div>
+      <div style="font-size:11px;font-weight:700;color:#173f35;text-transform:uppercase;letter-spacing:.5px">Folio Fiscal (UUID)</div>
       <div style="font-size:13px;color:#173f35;font-family:monospace;margin-top:4px;word-break:break-all">${folioFisc}</div>
     </div>
 
@@ -155,13 +155,13 @@ if (!order || !order.invoice?.requested) {
 
     <!-- Sellos digitales -->
     <div style="background:#f9fafb;border-radius:10px;padding:12px 14px">
-      <div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Cadena original del complemento de certificación digital del SAT (simulado)</div>
+      <div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Cadena original del complemento de certificación digital del SAT</div>
       <div style="font-size:11px;color:#9ca3af;font-family:monospace;word-break:break-all;line-height:1.6">${cadenaOrig}</div>
     </div>
 
     <div style="margin-top:12px;background:#f9fafb;border-radius:10px;padding:12px 14px">
-      <div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Sello digital del CFDI (simulado)</div>
-      <div style="font-size:11px;color:#9ca3af;font-family:monospace;word-break:break-all;line-height:1.6">CampusAmigo2026/FrontSimulado/NoTieneValidezFiscal/SoloEjercicioEducativo/CFDI/4.0/MXN/</div>
+      <div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Sello digital del CFDI</div>
+      <div style="font-size:11px;color:#9ca3af;font-family:monospace;word-break:break-all;line-height:1.6">CampusAmigo2026/NoTieneValidezFiscal/SoloEjercicioEducativo/CFDI/4.0/MXN/</div>
     </div>
 
     <!-- Pie de factura -->
@@ -185,7 +185,7 @@ printInvoice?.addEventListener("click", () => {
     btn.textContent = "✓ Descarga completada";
     if (msg) {
       msg.hidden = false;
-      msg.textContent = `Factura ${order.invoice.id} descargada correctamente (simulado).`;
+      msg.textContent = `Factura ${order.invoice.id} descargada correctamente.`;
     }
   }, 900);
 });

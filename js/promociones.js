@@ -18,7 +18,7 @@ btn?.addEventListener("click", () => {
     }
 
     if (code === "TEC10" || code === "DULCE2X1") {
-        msg.textContent = `Código aplicado (simulado): ${code}`;
+        msg.textContent = `Código aplicado: ${code}`;
     } else {
         msg.classList.add("danger");
         msg.textContent = "Código inválido o no disponible.";

@@ -21,5 +21,5 @@ btn?.addEventListener("click", () => {
 
     user.value = "";
     text.value = "";
-    msg.textContent = "Comentario enviado (simulado).";
+    msg.textContent = "Comentario enviado.";
 });
