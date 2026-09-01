@@ -12,19 +12,19 @@ const orders = LS.get("campusamigo_orders", []);
 let order = null;
 
 if (orderId) {
-    order = orders.find(o => o.id === orderId) || null;
+  order = orders.find((o) => o.id === orderId) || null;
 } else {
-    order = LS.get("campusamigo_last_order", null);
+  order = LS.get("campusamigo_last_order", null);
 }
 
 if (!order) {
-    ticketCard.innerHTML = `
+  ticketCard.innerHTML = `
     <div class="notice danger">
       No se encontró el comprobante solicitado.
     </div>
   `;
 } else {
-    ticketCard.innerHTML = `
+  ticketCard.innerHTML = `
     <div style="text-align:center; margin-bottom:18px">
       <h2 style="margin:0 0 8px">CampusAmigo</h2>
       <p class="small" style="margin:0">Comprobante de compra</p>
@@ -54,13 +54,17 @@ if (!order) {
         </tr>
       </thead>
       <tbody>
-        ${order.items.map(item => `
+        ${order.items
+          .map(
+            (item) => `
           <tr>
             <td>${item.name}</td>
             <td class="right">${item.qty}</td>
             <td class="right">${money(item.subtotal)}</td>
           </tr>
-        `).join("")}
+        `,
+          )
+          .join("")}
       </tbody>
     </table>
 
@@ -72,7 +76,7 @@ if (!order) {
 }
 
 downloadBtn?.addEventListener("click", () => {
-    ticketMsg.hidden = false;
-    ticketMsg.classList.remove("danger");
-    ticketMsg.textContent = "Descarga completada.";
+  ticketMsg.hidden = false;
+  ticketMsg.classList.remove("danger");
+  ticketMsg.textContent = "Descarga completada.";
 });

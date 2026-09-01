@@ -18,7 +18,7 @@ if (u) {
   const sellerField = $("#seller");
   if (sellerField) {
     sellerField.value = u.name;
-    sellerField.readOnly = true;          // no editable si ya está logueado
+    sellerField.readOnly = true; // no editable si ya está logueado
     sellerField.style.opacity = ".7";
   }
 } else {
@@ -33,35 +33,39 @@ if (u) {
 
 $("#save")?.addEventListener("click", () => {
   const sellerName = $("#seller").value.trim();
-  const name       = $("#name").value.trim();
-  const price      = Number($("#price").value);
-  const cat        = $("#cat").value;
-  const tag        = $("#tag").value;
-  const desc       = $("#desc").value.trim();
-  const image      = $("#image").value.trim();
+  const name = $("#name").value.trim();
+  const price = Number($("#price").value);
+  const cat = $("#cat").value;
+  const tag = $("#tag").value;
+  const desc = $("#desc").value.trim();
+  const image = $("#image").value.trim();
 
   // Validación
   if (!sellerName || !name || !Number.isFinite(price) || price <= 0) {
-    setMsg("Completa nombre del vendedor, nombre del producto y precio válido.", true);
+    setMsg(
+      "Completa nombre del vendedor, nombre del producto y precio válido.",
+      true,
+    );
     return;
   }
 
   // Construir producto
   const products = getProducts();
-  const newId = "p_" + Date.now().toString(36) + Math.random().toString(16).slice(2, 6);
+  const newId =
+    "p_" + Date.now().toString(36) + Math.random().toString(16).slice(2, 6);
 
   products.unshift({
-    id:         newId,
+    id: newId,
     name,
     price,
-    category:   cat,
+    category: cat,
     tag,
     desc,
-    image:      image || null,
+    image: image || null,
     // Vincular al usuario si hay sesión activa
-    sellerId:   u ? u.id   : "guest_" + Date.now().toString(36),
+    sellerId: u ? u.id : "guest_" + Date.now().toString(36),
     sellerName: u ? u.name : sellerName,
-    createdAt:  new Date().toISOString()
+    createdAt: new Date().toISOString(),
   });
 
   saveProducts(products);
@@ -69,11 +73,11 @@ $("#save")?.addEventListener("click", () => {
   setMsg("¡Publicado! Tu producto ya aparece en el catálogo.");
 
   // Limpiar formulario
-  $("#name").value  = "";
+  $("#name").value = "";
   $("#price").value = "";
-  $("#desc").value  = "";
+  $("#desc").value = "";
   $("#image").value = "";
-  $("#tag").value   = "";
+  $("#tag").value = "";
 
   setTimeout(() => {
     location.href = "catalogo.html";

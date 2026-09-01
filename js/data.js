@@ -6,7 +6,7 @@ window.SEED_PRODUCTS = [
     category: "electronica",
     tag: "Nuevo",
     desc: "Incluye Arduino UNO, protoboard y jumpers.",
-    image: "assets/img/arduino.jpg"
+    image: "assets/img/arduino.jpg",
   },
   {
     id: "p2",
@@ -15,7 +15,7 @@ window.SEED_PRODUCTS = [
     category: "electronica",
     tag: "Oferta",
     desc: "Sensor de distancia para proyectos de robótica.",
-    image: "assets/img/sensor.jpg"
+    image: "assets/img/sensor.jpg",
   },
   {
     id: "p3",
@@ -24,7 +24,7 @@ window.SEED_PRODUCTS = [
     category: "electronica",
     tag: "",
     desc: "LEDs variados y resistencias comunes.",
-    image: "assets/img/leds.jpg"
+    image: "assets/img/leds.jpg",
   },
   {
     id: "p4",
@@ -33,7 +33,7 @@ window.SEED_PRODUCTS = [
     category: "servicio",
     tag: "Nuevo",
     desc: "Impresión 3D de pieza pequeña en PLA.",
-    image: "assets/img/impresion3d.jpg"
+    image: "assets/img/impresion3d.jpg",
   },
   {
     id: "p5",
@@ -42,7 +42,7 @@ window.SEED_PRODUCTS = [
     category: "servicio",
     tag: "",
     desc: "Instalación y configuración básica de software.",
-    image: "assets/img/software.jpg"
+    image: "assets/img/software.jpg",
   },
   {
     id: "p6",
@@ -51,7 +51,7 @@ window.SEED_PRODUCTS = [
     category: "servicio",
     tag: "Oferta",
     desc: "Limpieza básica y revisión general.",
-    image: "assets/img/laptop.jpg"
+    image: "assets/img/laptop.jpg",
   },
   {
     id: "p7",
@@ -60,7 +60,7 @@ window.SEED_PRODUCTS = [
     category: "comida",
     tag: "Nuevo",
     desc: "Brownies caseros recién hechos.",
-    image: "assets/img/brownies.jpg"
+    image: "assets/img/brownies.jpg",
   },
   {
     id: "p8",
@@ -69,7 +69,7 @@ window.SEED_PRODUCTS = [
     category: "comida",
     tag: "",
     desc: "Burrito listo para recoger.",
-    image: "assets/img/burrito.jpg"
+    image: "assets/img/burrito.jpg",
   },
   {
     id: "p9",
@@ -78,6 +78,6 @@ window.SEED_PRODUCTS = [
     category: "comida",
     tag: "",
     desc: "Pizza individual para entrega en campus.",
-    image: "assets/img/pizza.jpg"
-  }
+    image: "assets/img/pizza.jpg",
+  },
 ];

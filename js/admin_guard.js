@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const u = (typeof currentUser === "function") ? currentUser() : null;
+  const u = typeof currentUser === "function" ? currentUser() : null;
 
   if (!u || u.role !== "admin") {
     alert("Acceso solo para administrador.");

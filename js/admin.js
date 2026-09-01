@@ -13,7 +13,7 @@ const ok = document.querySelector("#ok");
 
 let editingId = null;
 
-function resetForm(){
+function resetForm() {
   editingId = null;
   fname.value = "";
   fprice.value = "";
@@ -23,11 +23,11 @@ function resetForm(){
   ok.hidden = true;
 }
 
-function openForm(mode, product){
+function openForm(mode, product) {
   formCard.hidden = false;
   ok.hidden = true;
 
-  if(mode === "new"){
+  if (mode === "new") {
     formTitle.textContent = "Agregar producto";
     resetForm();
   } else {
@@ -39,19 +39,21 @@ function openForm(mode, product){
     ftag.value = product.tag || "";
     fdesc.value = product.desc || "";
   }
-  window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 }
 
-function closeForm(){
+function closeForm() {
   formCard.hidden = true;
   resetForm();
 }
 
-function render(){
+function render() {
   const products = getProducts();
-  rows.innerHTML = products.map(p=>`
+  rows.innerHTML = products
+    .map(
+      (p) => `
     <tr>
-      <td><b>${p.name}</b><div class="small">${(p.desc||"").slice(0,60)}</div></td>
+      <td><b>${p.name}</b><div class="small">${(p.desc || "").slice(0, 60)}</div></td>
       <td>${p.category}</td>
       <td class="right">${money(p.price)}</td>
       <td>${p.tag || "<span class='small'>(ninguna)</span>"}</td>
@@ -60,19 +62,21 @@ function render(){
         <button class="btn" data-del="${p.id}">Eliminar</button>
       </td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 
-  document.querySelectorAll("[data-edit]").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      const prod = getProducts().find(x=>x.id===b.dataset.edit);
-      if(prod) openForm("edit", prod);
+  document.querySelectorAll("[data-edit]").forEach((b) => {
+    b.addEventListener("click", () => {
+      const prod = getProducts().find((x) => x.id === b.dataset.edit);
+      if (prod) openForm("edit", prod);
     });
   });
 
-  document.querySelectorAll("[data-del]").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      if(confirm("¿Seguro que deseas eliminar este producto?")){
-        const updated = getProducts().filter(x=>x.id!==b.dataset.del);
+  document.querySelectorAll("[data-del]").forEach((b) => {
+    b.addEventListener("click", () => {
+      if (confirm("¿Seguro que deseas eliminar este producto?")) {
+        const updated = getProducts().filter((x) => x.id !== b.dataset.del);
         saveProducts(updated);
         render();
       }
@@ -80,38 +84,40 @@ function render(){
   });
 }
 
-document.querySelector("#new").addEventListener("click", ()=>openForm("new"));
+document.querySelector("#new").addEventListener("click", () => openForm("new"));
 document.querySelector("#cancel").addEventListener("click", closeForm);
 
-document.querySelector("#save").addEventListener("click", ()=>{
+document.querySelector("#save").addEventListener("click", () => {
   const name = fname.value.trim();
   const price = Number(fprice.value);
-  if(!name || !price || price<=0){
+  if (!name || !price || price <= 0) {
     alert("Nombre y precio válidos, por favor.");
     return;
   }
 
   const products = getProducts();
 
-  if(editingId){
-    const idx = products.findIndex(p=>p.id===editingId);
-    if(idx >= 0){
+  if (editingId) {
+    const idx = products.findIndex((p) => p.id === editingId);
+    if (idx >= 0) {
       products[idx] = {
         ...products[idx],
-        name, price,
+        name,
+        price,
         category: fcat.value,
         tag: ftag.value,
-        desc: fdesc.value.trim()
+        desc: fdesc.value.trim(),
       };
     }
   } else {
-    const newId = "p" + Math.random().toString(16).slice(2,8);
+    const newId = "p" + Math.random().toString(16).slice(2, 8);
     products.unshift({
       id: newId,
-      name, price,
+      name,
+      price,
       category: fcat.value,
       tag: ftag.value,
-      desc: fdesc.value.trim()
+      desc: fdesc.value.trim(),
     });
   }
 

@@ -1,20 +1,19 @@
 // js/auth.js
 document.addEventListener("DOMContentLoaded", () => {
-
   // ═══════════════════════════════════════════
   //  REGISTRO
   // ═══════════════════════════════════════════
   if (location.pathname.endsWith("registro.html")) {
-    const btn     = document.querySelector("#btn");
-    const nameEl  = document.querySelector("#name");
+    const btn = document.querySelector("#btn");
+    const nameEl = document.querySelector("#name");
     const emailEl = document.querySelector("#email");
-    const passEl  = document.querySelector("#pass");
-    const msg     = document.querySelector("#msg");
+    const passEl = document.querySelector("#pass");
+    const msg = document.querySelector("#msg");
 
     btn?.addEventListener("click", () => {
-      const name  = nameEl.value.trim();
+      const name = nameEl.value.trim();
       const email = emailEl.value.trim().toLowerCase();
-      const pass  = passEl.value.trim();
+      const pass = passEl.value.trim();
 
       // Validación básica
       if (!name || !email || !pass) {
@@ -28,19 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Verificar si el correo ya existe
       const users = getUsers();
-      if (users.find(u => u.email === email)) {
+      if (users.find((u) => u.email === email)) {
         showMsg(msg, "Ya existe una cuenta con ese correo.", true);
         return;
       }
 
       // Crear usuario
       const newUser = {
-        id:    "u_" + Date.now().toString(36),
+        id: "u_" + Date.now().toString(36),
         name,
         email,
         pass,
-        role:  "user",
-        createdAt: new Date().toISOString()
+        role: "user",
+        createdAt: new Date().toISOString(),
       };
       users.push(newUser);
       saveUsers(users);
@@ -59,14 +58,14 @@ document.addEventListener("DOMContentLoaded", () => {
   //  LOGIN
   // ═══════════════════════════════════════════
   if (location.pathname.endsWith("login.html")) {
-    const btn     = document.querySelector("#btn");
+    const btn = document.querySelector("#btn");
     const emailEl = document.querySelector("#email");
-    const passEl  = document.querySelector("#pass");
-    const msg     = document.querySelector("#msg");
+    const passEl = document.querySelector("#pass");
+    const msg = document.querySelector("#msg");
 
     btn?.addEventListener("click", () => {
       const email = emailEl.value.trim().toLowerCase();
-      const pass  = passEl.value.trim();
+      const pass = passEl.value.trim();
 
       if (!email || !pass) {
         showMsg(msg, "Ingresa correo y contraseña.", true);
@@ -75,14 +74,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ── Cuenta admin ──────────────────────
       if (email === "admin@admin.com" && pass === "123") {
-        _saveSession({ id: "admin", name: "Administrador", email: "admin@admin.com", role: "admin" });
+        _saveSession({
+          id: "admin",
+          name: "Administrador",
+          email: "admin@admin.com",
+          role: "admin",
+        });
         location.href = _getRedirectAfterLogin() || "perfil.html";
         return;
       }
 
       // ── Usuarios registrados ───────────────
       const users = getUsers();
-      const found = users.find(u => u.email === email && u.pass === pass);
+      const found = users.find((u) => u.email === email && u.pass === pass);
 
       if (!found) {
         showMsg(msg, "Correo o contraseña incorrectos.", true);
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Permitir Enter en el campo de contraseña
-    passEl?.addEventListener("keydown", e => {
+    passEl?.addEventListener("keydown", (e) => {
       if (e.key === "Enter") btn?.click();
     });
   }
@@ -119,14 +123,15 @@ function renderProfile() {
   out.hidden = true;
   inn.hidden = false;
 
-  const pName  = document.querySelector("#pName");
+  const pName = document.querySelector("#pName");
   const pEmail = document.querySelector("#pEmail");
-  if (pName)  pName.textContent  = u.name;
+  if (pName) pName.textContent = u.name;
   if (pEmail) pEmail.textContent = u.email;
 
   // Mostrar badge de rol si es admin
   const rolEl = document.querySelector("#pRole");
-  if (rolEl) rolEl.textContent = u.role === "admin" ? "Administrador" : "Usuario";
+  if (rolEl)
+    rolEl.textContent = u.role === "admin" ? "Administrador" : "Usuario";
 
   // Cerrar sesión
   document.querySelector("#logout")?.addEventListener("click", () => {
@@ -140,10 +145,10 @@ function renderProfile() {
 // ═══════════════════════════════════════════
 function _saveSession(user) {
   LS.set(KEYS.session, {
-    id:    user.id,
-    name:  user.name,
+    id: user.id,
+    name: user.name,
     email: user.email,
-    role:  user.role || "user"
+    role: user.role || "user",
   });
 }
 

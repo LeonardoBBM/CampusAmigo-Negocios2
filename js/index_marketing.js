@@ -1,1 +1,12 @@
-ensureSeed();const showcase=document.querySelector('#showcase');const pool=getProducts();const featured=['p1','p7','p4','p6'].map(id=>pool.find(p=>p.id===id)).filter(Boolean);const items=[...featured,...pool.filter(p=>!featured.includes(p))].slice(0,4);showcase.innerHTML=items.map(UI.card).join('');UI.bindProducts(showcase);
+ensureSeed();
+const showcase = document.querySelector("#showcase");
+const pool = getProducts();
+const featured = ["p1", "p7", "p4", "p6"]
+  .map((id) => pool.find((p) => p.id === id))
+  .filter(Boolean);
+const items = [...featured, ...pool.filter((p) => !featured.includes(p))].slice(
+  0,
+  4,
+);
+showcase.innerHTML = items.map(UI.card).join("");
+UI.bindProducts(showcase);

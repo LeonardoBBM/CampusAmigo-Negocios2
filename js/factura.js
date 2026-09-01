@@ -8,17 +8,27 @@ const urlParams = new URLSearchParams(location.search);
 const orderId = urlParams.get("id");
 const orders = LS.get("campusamigo_orders", []);
 const order = orderId
-  ? orders.find(o => o.id === orderId)
+  ? orders.find((o) => o.id === orderId)
   : LS.get("campusamigo_last_order", null);
 
 // ── Helpers ────────────────────────────────────────────────
 function genFolioFiscal(seed) {
   // Simula un UUID tipo SAT a partir del ID del pedido
-  const h = s => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) & 0xffffffff, 0)
-    .toString(16).padStart(8, "0");
+  const h = (s) =>
+    [...s]
+      .reduce((a, c) => (a * 31 + c.charCodeAt(0)) & 0xffffffff, 0)
+      .toString(16)
+      .padStart(8, "0");
   const parts = [seed.slice(0, 4), seed.slice(-4)];
-  return [h(parts[0] + "a"), h(parts[1] + "b"), h(seed + "c"), h(seed + "d"), h(seed + "efgh")]
-    .join("-").toUpperCase();
+  return [
+    h(parts[0] + "a"),
+    h(parts[1] + "b"),
+    h(seed + "c"),
+    h(seed + "d"),
+    h(seed + "efgh"),
+  ]
+    .join("-")
+    .toUpperCase();
 }
 
 function calcIVA(subtotal) {
@@ -39,13 +49,12 @@ if (!order || !order.invoice?.requested) {
     </div>
   `;
 } else {
-
   // ── Cálculos fiscales ────────────────────────────────────
-  const subtotal   = Math.round((order.total / 1.16) * 100) / 100;
-  const iva        = Math.round((order.total - subtotal) * 100) / 100;
-  const total      = order.total;
-  const folioFisc  = genFolioFiscal(order.invoice.id + order.id);
-  const cadenaOrig = `||1.2|${order.invoice.id}|${order.date}|${order.invoice.rfc}|${money(subtotal).replace("$","")}|MXN||`;
+  const subtotal = Math.round((order.total / 1.16) * 100) / 100;
+  const iva = Math.round((order.total - subtotal) * 100) / 100;
+  const total = order.total;
+  const folioFisc = genFolioFiscal(order.invoice.id + order.id);
+  const cadenaOrig = `||1.2|${order.invoice.id}|${order.date}|${order.invoice.rfc}|${money(subtotal).replace("$", "")}|MXN||`;
 
   invoiceCard.innerHTML = `
 
@@ -120,7 +129,9 @@ if (!order || !order.invoice?.requested) {
         </tr>
       </thead>
       <tbody>
-        ${order.items.map(item => `
+        ${order.items
+          .map(
+            (item) => `
           <tr>
             <td>
               <div style="font-weight:600;color:#111827">${item.name}</div>
@@ -130,7 +141,9 @@ if (!order || !order.invoice?.requested) {
             <td class="right" style="color:#374151">${money(item.price)}</td>
             <td class="right" style="font-weight:700;color:#111827">${money(item.subtotal)}</td>
           </tr>
-        `).join("")}
+        `,
+          )
+          .join("")}
       </tbody>
     </table>
 

@@ -2,14 +2,15 @@ ensureSeed();
 updateCartBadge();
 
 const u = requireLoginOrRedirect("mis_publicaciones.html");
-if (!u) { }
+if (!u) {
+}
 
 const rows = document.querySelector("#rows");
 const empty = document.querySelector("#empty");
 
 function deleteProduct(productId) {
   const products = getProducts();
-  const product = products.find(p => p.id === productId);
+  const product = products.find((p) => p.id === productId);
 
   if (!product) return;
 
@@ -19,16 +20,17 @@ function deleteProduct(productId) {
     return;
   }
 
-  if (!confirm("¿Eliminar esta publicación? Esta acción no se puede deshacer.")) return;
+  if (!confirm("¿Eliminar esta publicación? Esta acción no se puede deshacer."))
+    return;
 
-  const updated = products.filter(p => p.id !== productId);
+  const updated = products.filter((p) => p.id !== productId);
   saveProducts(updated);
 
   render();
 }
 
 function render() {
-  const products = getProducts().filter(p => p.sellerId === u.id);
+  const products = getProducts().filter((p) => p.sellerId === u.id);
 
   if (products.length === 0) {
     rows.innerHTML = "";
@@ -38,7 +40,9 @@ function render() {
 
   empty.hidden = true;
 
-  rows.innerHTML = products.map(p => `
+  rows.innerHTML = products
+    .map(
+      (p) => `
     <tr>
       <td>
         <b>${p.name}</b>
@@ -51,10 +55,12 @@ function render() {
         <button class="btn danger" data-del="${p.id}">Eliminar</button>
       </td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 
   // Activar botones eliminar
-  document.querySelectorAll("[data-del]").forEach(btn => {
+  document.querySelectorAll("[data-del]").forEach((btn) => {
     btn.addEventListener("click", () => {
       deleteProduct(btn.dataset.del);
     });

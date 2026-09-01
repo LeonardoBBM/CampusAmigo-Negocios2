@@ -2,7 +2,7 @@ ensureSeed();
 updateCartBadge();
 
 const id = getParam("id");
-const p = getProducts().find(x => x.id === id);
+const p = getProducts().find((x) => x.id === id);
 
 const $ = (s) => document.querySelector(s);
 
@@ -37,8 +37,7 @@ function renderStaticComments() {
 }
 
 if (!p) {
-  document.querySelector("main").innerHTML =
-    `<div class="container">
+  document.querySelector("main").innerHTML = `<div class="container">
       <p class="notice danger">Producto no encontrado.</p>
       <a class="btn" href="catalogo.html">Volver</a>
     </div>`;
@@ -51,23 +50,27 @@ if (!p) {
 
   const sellerWrap = document.querySelector("#seller");
   if (sellerWrap) {
-    sellerWrap.textContent = p.sellerId ? (p.sellerName || "Usuario") : "CampusAmigo";
+    sellerWrap.textContent = p.sellerId
+      ? p.sellerName || "Usuario"
+      : "CampusAmigo";
   }
 
   if (p.tag) {
-    const tagClass = p.tag === "Nuevo" ? "new" : (p.tag === "Oferta" ? "sale" : "");
+    const tagClass =
+      p.tag === "Nuevo" ? "new" : p.tag === "Oferta" ? "sale" : "";
     $("#tag").innerHTML = `<span class="tag ${tagClass}">${p.tag}</span>`;
   }
 
   $("#add").addEventListener("click", () => {
     const qty = Number($("#qty").value || 1);
-    addToCart(p.id, qty); UI.toast("Producto agregado a tu carrito");
+    addToCart(p.id, qty);
+    UI.toast("Producto agregado a tu carrito");
 
     $("#msg").hidden = false;
     $("#msg").textContent = `Agregado al carrito: ${qty} x ${p.name}`;
     updateCartBadge();
 
-    setTimeout(() => $("#msg").hidden = true, 1200);
+    setTimeout(() => ($("#msg").hidden = true), 1200);
   });
 
   // comentarios simulados
@@ -93,8 +96,11 @@ if (!p) {
   });
 
   const rel = getProducts()
-    .filter(x => x.category === p.category && x.id !== p.id)
+    .filter((x) => x.category === p.category && x.id !== p.id)
     .slice(0, 3);
 
-  document.querySelector("#rel").innerHTML = rel.map(UI.card).join("") || `<p class="small">No hay relacionados aún.</p>`; UI.bindProducts(document.querySelector("#rel"));
+  document.querySelector("#rel").innerHTML =
+    rel.map(UI.card).join("") ||
+    `<p class="small">No hay relacionados aún.</p>`;
+  UI.bindProducts(document.querySelector("#rel"));
 }
