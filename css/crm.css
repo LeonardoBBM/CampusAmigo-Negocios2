@@ -1,0 +1,102 @@
+.crm-toolbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.crm-toolbar-filters {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:1;
+  flex-wrap:wrap;
+}
+
+.crm-toolbar-filters .input {
+  width:min(330px,100%);
+}
+
+.crm-stat {
+  position:relative;
+  overflow:hidden;
+}
+
+.crm-stat::after {
+  content:"";
+  position:absolute;
+  right:-26px;
+  bottom:-34px;
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  background:var(--mint);
+  opacity:.7;
+}
+
+.crm-stat strong {
+  position:relative;
+  z-index:1;
+  display:block;
+  margin-top:8px;
+  font-size:34px;
+  line-height:1;
+  color:var(--forest);
+}
+
+.crm-person {
+  display:grid;
+  gap:3px;
+}
+
+.crm-person small {
+  color:var(--muted);
+}
+
+.crm-stage-select {
+  min-width:135px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.crm-form-actions {
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+
+.crm-welcome {
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:24px;
+}
+
+.crm-access-card {
+  width:min(560px,100%);
+}
+
+.crm-access-note {
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
+
+@media(max-width:720px) {
+  .crm-welcome {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .crm-toolbar-filters>* {
+    width:100%!important;
+  }
+
+  .crm-toolbar>.btn {
+    width:100%;
+  }
+}
+

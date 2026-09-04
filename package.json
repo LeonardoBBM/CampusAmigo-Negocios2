@@ -1,0 +1,30 @@
+{
+  "name": "campusamigo-negocios2",
+  "version": "1.0.0",
+  "description": "Marketplace universitario CampusAmigo con módulo CRM académico.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "db:migrate": "node server/database/migrate.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeonardoBBM/CampusAmigo-Negocios2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "bugs": {
+    "url": "https://github.com/LeonardoBBM/CampusAmigo-Negocios2/issues"
+  },
+  "homepage": "https://github.com/LeonardoBBM/CampusAmigo-Negocios2#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

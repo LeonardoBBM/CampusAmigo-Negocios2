@@ -1,186 +1,35 @@
 /* Interacciones compartidas. Sin dependencias; datos exclusivamente locales. */
 const UI = (() => {
   const paths = {
-    search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
-    arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
-    "arrow-up": '<path d="M6 18 18 6M6 6h12v12"/>',
-    heart:
-      '<path d="M20.3 5.7a5 5 0 0 0-7.1 0L12 7l-1.3-1.3a5 5 0 0 0-7.1 7.1L12 21l8.3-8.2a5 5 0 0 0 0-7.1Z"/>',
-    bag: '<path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/>',
-    plus: '<path d="M12 5v14M5 12h14"/>',
-    check: '<path d="m5 12 4 4L19 6"/>',
-    menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
-    close: '<path d="m6 6 12 12M6 18 18 6"/>',
-    pin: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
-    chip: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/><rect x="9" y="9" width="6" height="6" rx="1"/>',
-    tools:
-      '<path d="m14 6 4 4 3-3a6 6 0 0 1-7 8L7 22l-4-4 7-7a6 6 0 0 1 8-7l-4 2Z"/>',
-    coffee:
-      '<path d="M4 8h12v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8ZM16 9h2a3 3 0 0 1 0 6h-2M7 2v3m5-3v3M2 22h18"/>',
-    bolt: '<path d="m13 2-9 12h7l-1 8 10-12h-7l1-8Z"/>',
-    spark:
-      '<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>',
-    chevron: '<path d="m7 10 5 5 5-5"/>',
-    exit: '<path d="M10 4H4v16h6m4-4 4-4-4-4m-5 4h11"/>',
-    package:
-      '<path d="m12 2 9 5v10l-9 5-9-5V7l9-5Zm0 10 9-5M12 12 3 7m9 5v10M7 4.8l10 5.5"/>',
+    search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+    arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+    'arrow-up':'<path d="M6 18 18 6M6 6h12v12"/>',
+    heart:'<path d="M20.3 5.7a5 5 0 0 0-7.1 0L12 7l-1.3-1.3a5 5 0 0 0-7.1 7.1L12 21l8.3-8.2a5 5 0 0 0 0-7.1Z"/>',
+    bag:'<path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/>',
+    plus:'<path d="M12 5v14M5 12h14"/>',
+    check:'<path d="m5 12 4 4L19 6"/>',
+    menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+    close:'<path d="m6 6 12 12M6 18 18 6"/>',
+    pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+    chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/><rect x="9" y="9" width="6" height="6" rx="1"/>',
+    tools:'<path d="m14 6 4 4 3-3a6 6 0 0 1-7 8L7 22l-4-4 7-7a6 6 0 0 1 8-7l-4 2Z"/>',
+    coffee:'<path d="M4 8h12v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8ZM16 9h2a3 3 0 0 1 0 6h-2M7 2v3m5-3v3M2 22h18"/>',
+    bolt:'<path d="m13 2-9 12h7l-1 8 10-12h-7l1-8Z"/>',
+    spark:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>',
+    chevron:'<path d="m7 10 5 5 5-5"/>',
+    exit:'<path d="M10 4H4v16h6m4-4 4-4-4-4m-5 4h11"/>',
+    package:'<path d="m12 2 9 5v10l-9 5-9-5V7l9-5Zm0 10 9-5M12 12 3 7m9 5v10M7 4.8l10 5.5"/>'
   };
-  const icon = (name) =>
-    `<svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">${paths[name] || paths.spark}</svg>`;
-  const escape = (value) =>
-    String(value ?? "").replace(
-      /[&<>"']/g,
-      (c) =>
-        ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        })[c],
-    );
-  function hydrate(root = document) {
-    root.querySelectorAll("[data-icon]").forEach((el) => {
-      el.innerHTML = icon(el.dataset.icon);
-      el.removeAttribute("data-icon");
-    });
-  }
-  const category = (value) =>
-    ({
-      electronica: "Electrónica",
-      servicio: "Servicios",
-      comida: "Comida y antojos",
-    })[value] || value;
-  function safeImage(value) {
-    if (!value) return "";
-    return /^(assets\/img\/[\w.\/-]+|https?:\/\/[^\s"<>]+)$/i.test(value)
-      ? value
-      : "";
-  }
-  function toast(message) {
-    let stack = document.querySelector(".toast-stack");
-    if (!stack) {
-      stack = document.createElement("div");
-      stack.className = "toast-stack";
-      stack.setAttribute("role", "status");
-      stack.setAttribute("aria-live", "polite");
-      document.body.appendChild(stack);
-    }
-    const el = document.createElement("div");
-    el.className = "toast";
-    el.innerHTML = icon("check");
-    const text = document.createElement("span");
-    text.textContent = message;
-    el.appendChild(text);
-    stack.appendChild(el);
-    setTimeout(() => {
-      el.classList.add("is-leaving");
-      setTimeout(() => el.remove(), 250);
-    }, 3000);
-  }
-  function favorites() {
-    return LS.get("campusamigo_favorites", []);
-  }
-  function card(p) {
-    const saved = favorites().includes(p.id),
-      src = safeImage(p.image),
-      url = "producto.html?id=" + encodeURIComponent(p.id);
-    return `<article class="card product" data-category="${escape(p.category)}"><a class="product-image-link" href="${url}" tabindex="-1" aria-hidden="true"><div class="prod-media">${src ? `<img src="${escape(src)}" alt="" loading="lazy">` : `<div class="prod-fallback">${icon("package")}CampusAmigo</div>`}</div></a>${p.tag ? `<span class="tag ${p.tag === "Oferta" ? "sale" : "new"}">${escape(p.tag)}</span>` : ""}<button class="product-favorite" data-favorite="${escape(p.id)}" aria-label="Guardar ${escape(p.name)}" aria-pressed="${saved}">${icon("heart")}</button><div class="p-body"><span class="p-category">${escape(category(p.category))}</span><a href="${url}"><h3 class="p-title">${escape(p.name)}</h3></a><div class="p-seller">${icon("pin")}${escape(p.sellerName || "Tienda CampusAmigo")}</div><div class="p-actions"><span class="price">${money(p.price)}<small>MXN</small></span><button class="btn" data-add="${escape(p.id)}" aria-label="Agregar ${escape(p.name)} al carrito">${icon("plus")}<span class="add-label">Agregar</span></button></div></div></article>`;
-  }
-  function bindProducts(root) {
-    root.querySelectorAll("[data-add]").forEach((btn) =>
-      btn.addEventListener("click", () => {
-        addToCart(btn.dataset.add, 1);
-        toast("Producto agregado a tu carrito");
-        document.querySelectorAll("[data-cart-count]").forEach((el) => {
-          el.classList.remove("badge-pop");
-          void el.offsetWidth;
-          el.classList.add("badge-pop");
-        });
-      }),
-    );
-    root.querySelectorAll("[data-favorite]").forEach((btn) =>
-      btn.addEventListener("click", () => {
-        const id = btn.dataset.favorite,
-          list = favorites(),
-          exists = list.includes(id);
-        LS.set(
-          "campusamigo_favorites",
-          exists ? list.filter((x) => x !== id) : [...list, id],
-        );
-        btn.setAttribute("aria-pressed", String(!exists));
-        toast(exists ? "Eliminado de tus guardados" : "Guardado para después");
-        document.dispatchEvent(new CustomEvent("favoriteschange"));
-      }),
-    );
-    root.querySelectorAll(".prod-media img").forEach((img) =>
-      img.addEventListener(
-        "error",
-        () => {
-          img.parentElement.innerHTML = `<div class="prod-fallback">${icon("package")}Imagen no disponible</div>`;
-        },
-        { once: true },
-      ),
-    );
-  }
-  function init() {
-    ensureSeed();
-    hydrate();
-    const prefix = location.pathname.includes("/admin/") ? "../" : "";
-    const skip = document.createElement("a");
-    skip.href = "#main-content";
-    skip.className = "skip-link";
-    skip.textContent = "Saltar al contenido";
-    document.body.prepend(skip);
-    document.querySelectorAll(".table").forEach((table) => {
-      if (table.parentElement.classList.contains("table-scroll")) return;
-      const wrap = document.createElement("div");
-      wrap.className = "table-scroll";
-      wrap.setAttribute("tabindex", "0");
-      wrap.setAttribute("role", "region");
-      wrap.setAttribute("aria-label", "Tabla desplazable");
-      table.before(wrap);
-      wrap.appendChild(table);
-    });
-    const footer = document.createElement("footer");
-    footer.className = "site-footer";
-    footer.innerHTML = `<div class="container"><div class="footer-top"><div><a class="brand" href="${prefix}index.html"><span class="brand-mark">ca.</span>campusamigo</a><p>Lo que necesitas. Lo que sabes hacer.<br>Todo conecta en tu campus.</p></div><nav class="footer-links" aria-label="Enlaces del pie"><a href="${prefix}catalogo.html">Explorar</a><a href="${prefix}publicar.html">Publicar</a><a href="${prefix}nosotros.html">Nosotros</a><a href="${prefix}contacto.html">Contacto</a></nav></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} CampusAmigo · Hecho para conectar.</span><span class="demo-label">Proyecto académico · Compras y pagos</span></div></div>`;
-    document.body.appendChild(footer);
-    if (
-      "IntersectionObserver" in window &&
-      !matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      const observer = new IntersectionObserver(
-        (entries) =>
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("is-visible");
-              observer.unobserve(e.target);
-            }
-          }),
-        { threshold: 0.08 },
-      );
-      document.querySelectorAll("[data-reveal]").forEach((el) => {
-        el.classList.add("reveal-ready");
-        observer.observe(el);
-      });
-    }
-    document.querySelectorAll("main>h1").forEach((el) => {
-      const k = document.createElement("span");
-      k.className = "page-kicker";
-      k.textContent = "CAMPUSAMIGO / TU COMUNIDAD";
-      el.before(k);
-    });
-  }
-  document.addEventListener("DOMContentLoaded", init);
-  return {
-    icon,
-    escape,
-    hydrate,
-    category,
-    toast,
-    card,
-    bindProducts,
-    safeImage,
-  };
+  const icon=name=>`<svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">${paths[name]||paths.spark}</svg>`;
+  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function hydrate(root=document){root.querySelectorAll('[data-icon]').forEach(el=>{el.innerHTML=icon(el.dataset.icon);el.removeAttribute('data-icon');});}
+  const category = value=>({electronica:'Electrónica',servicio:'Servicios',comida:'Comida y antojos'}[value]||value);
+  function safeImage(value){if(!value)return '';return /^(assets\/img\/[\w.\/-]+|https?:\/\/[^\s"<>]+)$/i.test(value)?value:'';}
+  function toast(message){let stack=document.querySelector('.toast-stack');if(!stack){stack=document.createElement('div');stack.className='toast-stack';stack.setAttribute('role','status');stack.setAttribute('aria-live','polite');document.body.appendChild(stack);}const el=document.createElement('div');el.className='toast';el.innerHTML=icon('check');const text=document.createElement('span');text.textContent=message;el.appendChild(text);stack.appendChild(el);setTimeout(()=>{el.classList.add('is-leaving');setTimeout(()=>el.remove(),250);},3000);}
+  function favorites(){return LS.get('campusamigo_favorites',[]);}
+  function card(p){const saved=favorites().includes(p.id),src=safeImage(p.image),url='producto.html?id='+encodeURIComponent(p.id);return `<article class="card product" data-category="${escape(p.category)}"><a class="product-image-link" href="${url}" tabindex="-1" aria-hidden="true"><div class="prod-media">${src?`<img src="${escape(src)}" alt="" loading="lazy">`:`<div class="prod-fallback">${icon('package')}CampusAmigo</div>`}</div></a>${p.tag?`<span class="tag ${p.tag==='Oferta'?'sale':'new'}">${escape(p.tag)}</span>`:''}<button class="product-favorite" data-favorite="${escape(p.id)}" aria-label="Guardar ${escape(p.name)}" aria-pressed="${saved}">${icon('heart')}</button><div class="p-body"><span class="p-category">${escape(category(p.category))}</span><a href="${url}"><h3 class="p-title">${escape(p.name)}</h3></a><div class="p-seller">${icon('pin')}${escape(p.sellerName||'Tienda CampusAmigo')}</div><div class="p-actions"><span class="price">${money(p.price)}<small>MXN</small></span><button class="btn" data-add="${escape(p.id)}" aria-label="Agregar ${escape(p.name)} al carrito">${icon('plus')}<span class="add-label">Agregar</span></button></div></div></article>`;}
+  function bindProducts(root){root.querySelectorAll('[data-add]').forEach(btn=>btn.addEventListener('click',()=>{addToCart(btn.dataset.add,1);toast('Producto agregado a tu carrito');document.querySelectorAll('[data-cart-count]').forEach(el=>{el.classList.remove('badge-pop');void el.offsetWidth;el.classList.add('badge-pop');});}));root.querySelectorAll('[data-favorite]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.favorite,list=favorites(),exists=list.includes(id);LS.set('campusamigo_favorites',exists?list.filter(x=>x!==id):[...list,id]);btn.setAttribute('aria-pressed',String(!exists));toast(exists?'Eliminado de tus guardados':'Guardado para después');document.dispatchEvent(new CustomEvent('favoriteschange'));}));root.querySelectorAll('.prod-media img').forEach(img=>img.addEventListener('error',()=>{img.parentElement.innerHTML=`<div class="prod-fallback">${icon('package')}Imagen no disponible</div>`;},{once:true}));}
+  function init(){ensureSeed();hydrate();const nested=location.pathname.includes('/admin/')||location.pathname.includes('/crm/');const prefix=nested?'../':'';const skip=document.createElement('a');skip.href='#main-content';skip.className='skip-link';skip.textContent='Saltar al contenido';document.body.prepend(skip);document.querySelectorAll('.table').forEach(table=>{if(table.parentElement.classList.contains('table-scroll'))return;const wrap=document.createElement('div');wrap.className='table-scroll';wrap.setAttribute('tabindex','0');wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabla desplazable');table.before(wrap);wrap.appendChild(table);});const footer=document.createElement('footer');footer.className='site-footer';footer.innerHTML=`<div class="container"><div class="footer-top"><div><a class="brand" href="${prefix}index.html"><span class="brand-mark">ca.</span>campusamigo</a><p>Lo que necesitas. Lo que sabes hacer.<br>Todo conecta en tu campus.</p></div><nav class="footer-links" aria-label="Enlaces del pie"><a href="${prefix}catalogo.html">Explorar</a><a href="${prefix}publicar.html">Publicar</a><a href="${prefix}nosotros.html">Nosotros</a><a href="${prefix}contacto.html">Contacto</a></nav></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} CampusAmigo · Hecho para conectar.</span><span class="demo-label">Proyecto académico · Compras y pagos simulados</span></div></div>`;document.body.appendChild(footer);if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target);}}),{threshold:.08});document.querySelectorAll('[data-reveal]').forEach(el=>{el.classList.add('reveal-ready');observer.observe(el);});}document.querySelectorAll('main>h1').forEach(el=>{const k=document.createElement('span');k.className='page-kicker';k.textContent='CAMPUSAMIGO / TU COMUNIDAD';el.before(k);});}
+  document.addEventListener('DOMContentLoaded',init);
+  return {icon,escape,hydrate,category,toast,card,bindProducts,safeImage};
 })();

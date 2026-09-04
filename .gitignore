@@ -1,0 +1,9 @@
+node_modules/
+.env
+npm-debug.log*
+
+# Base de datos local y archivos auxiliares de SQLite
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+

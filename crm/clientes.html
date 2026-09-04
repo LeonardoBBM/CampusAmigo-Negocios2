@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusAmigo CRM | Clientes</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/crm.css">
+</head>
+<body>
+  <header></header>
+  <main id="main-content" class="container">
+    <div class="crm-welcome">
+      <div>
+        <span class="eyebrow">CRM / INFORMACIÓN CENTRALIZADA</span>
+        <h1 style="margin:10px 0 8px">Clientes</h1>
+        <p style="margin:0">Consulta la información y etapa actual de cada relación.</p>
+      </div>
+      <button id="addClient" class="btn primary" type="button">+ Agregar cliente</button>
+    </div>
+
+    <div id="clientMsg" class="notice" hidden></div>
+
+    <section class="card">
+      <div class="crm-toolbar">
+        <div class="crm-toolbar-filters">
+          <label class="sr-only" for="q">Buscar clientes</label>
+          <input id="q" class="input" placeholder="Buscar por nombre, correo, teléfono o empresa">
+          <label class="sr-only" for="statusFilter">Filtrar por estado</label>
+          <select id="statusFilter">
+            <option value="">Todos los estados</option>
+            <option value="activo">Activos</option>
+            <option value="inactivo">Inactivos</option>
+          </select>
+          <label class="sr-only" for="stageFilter">Filtrar por etapa</label>
+          <select id="stageFilter">
+            <option value="">Todas las etapas</option>
+            <option value="Prospecto">Prospecto</option>
+            <option value="Activo">Activo</option>
+            <option value="Frecuente">Frecuente</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+        </div>
+        <span id="clientCount" class="pill" data-total="0">0 clientes</span>
+      </div>
+
+      <table class="table" style="margin-top:18px">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Empresa / contacto</th>
+            <th>Estado</th>
+            <th>Etapa CRM</th>
+            <th>Registro</th>
+            <th class="right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="clientRows">
+          <tr><td colspan="6" class="small">Cargando clientes…</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="clientFormCard" class="card" style="margin-top:24px" hidden>
+      <h2 id="clientFormTitle">Agregar cliente</h2>
+      <form id="clientForm">
+        <div class="grid">
+          <div class="field" style="grid-column:span 6">
+            <label for="clientName">Nombre</label>
+            <input id="clientName" class="input" required minlength="2" maxlength="120">
+          </div>
+          <div class="field" style="grid-column:span 6">
+            <label for="clientEmail">Correo</label>
+            <input id="clientEmail" class="input" type="email" required>
+          </div>
+          <div class="field" style="grid-column:span 6">
+            <label for="clientPhone">Teléfono</label>
+            <input id="clientPhone" class="input" maxlength="30">
+          </div>
+          <div class="field" style="grid-column:span 6">
+            <label for="clientCompany">Empresa / institución</label>
+            <input id="clientCompany" class="input" maxlength="120">
+          </div>
+          <div class="field" style="grid-column:span 6">
+            <label for="clientStatus">Estado</label>
+            <select id="clientStatus">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </div>
+          <div class="field" style="grid-column:span 6">
+            <label for="clientStage">Etapa CRM</label>
+            <select id="clientStage">
+              <option value="Prospecto">Prospecto</option>
+              <option value="Activo">Activo</option>
+              <option value="Frecuente">Frecuente</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+        <div class="crm-form-actions">
+          <button id="cancelClient" class="btn" type="button">Cancelar</button>
+          <button id="saveClient" class="btn primary" type="submit">Guardar cliente</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/crm_api.js"></script>
+  <script src="../js/crm_nav.js"></script>
+  <script src="../js/crm_clientes.js"></script>
+</body>
+</html>
+

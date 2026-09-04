@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusAmigo CRM | Resumen</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/crm.css">
+</head>
+<body>
+  <header></header>
+  <main id="main-content" class="container">
+    <section class="crm-welcome">
+      <div>
+        <span class="eyebrow">CAMPUSAMIGO / RELACIÓN CON CLIENTES</span>
+        <h1 style="margin:10px 0 8px">Una vista clara de tu comunidad.</h1>
+        <p style="margin:0">Hola, <b id="crmUserName">—</b>. Consulta el estado general y continúa el seguimiento.</p>
+      </div>
+      <span id="crmUserRole" class="pill">—</span>
+    </section>
+
+    <div id="dashboardMsg" class="notice" hidden></div>
+
+    <section class="grid">
+      <article class="card crm-stat" style="grid-column:span 4">
+        <span class="small">Total de clientes</span>
+        <strong id="totalClients">0</strong>
+      </article>
+      <article class="card crm-stat" style="grid-column:span 4">
+        <span class="small">Clientes activos</span>
+        <strong id="activeClients">0</strong>
+      </article>
+      <article class="card crm-stat" style="grid-column:span 4">
+        <span class="small">Clientes inactivos</span>
+        <strong id="inactiveClients">0</strong>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <div class="row" style="align-items:flex-end;flex-wrap:wrap">
+        <div>
+          <span class="eyebrow">PRIMER MÓDULO DISPONIBLE</span>
+          <h2 style="margin:8px 0">Directorio de clientes</h2>
+          <p style="margin:0">Registra, busca, clasifica y actualiza la etapa de cada relación.</p>
+        </div>
+        <a class="btn primary" href="clientes.html">Abrir clientes <span data-icon="arrow"></span></a>
+      </div>
+    </section>
+  </main>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/crm_api.js"></script>
+  <script src="../js/crm_nav.js"></script>
+  <script src="../js/crm_dashboard.js"></script>
+</body>
+</html>
+
