@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusAmigo CRM | Evaluaciones</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/crm.css">
+</head>
+<body>
+  <header></header>
+  <main id="main-content" class="container">
+    <div class="crm-welcome">
+      <div>
+        <span class="eyebrow">CRM / CALIDAD DE LA RELACIÓN</span>
+        <h1 style="margin:10px 0 8px">Evaluaciones</h1>
+        <p style="margin:0">Consulta las valoraciones registradas; las nuevas se agregan desde el expediente del cliente.</p>
+      </div>
+      <a class="btn primary" href="clientes.html">Abrir clientes</a>
+    </div>
+    <div id="evaluationMsg" class="notice" hidden></div>
+    <section class="card">
+      <div class="crm-card-heading">
+        <div><span class="eyebrow">REGISTROS RECIENTES</span><h2 style="margin-top:8px">Historial de evaluaciones</h2></div>
+        <span id="evaluationCount" class="pill">0 evaluaciones</span>
+      </div>
+      <table class="table">
+        <thead><tr><th>Fecha</th><th>Cliente</th><th>Calificación</th><th>Comentario</th><th>Responsable</th><th class="right">Expediente</th></tr></thead>
+        <tbody id="evaluationRows"><tr><td colspan="6" class="small">Cargando evaluaciones…</td></tr></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/crm_api.js"></script>
+  <script src="../js/crm_nav.js"></script>
+  <script src="../js/crm_evaluaciones.js"></script>
+</body>
+</html>

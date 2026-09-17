@@ -49,6 +49,48 @@ const CRM = (() => {
     element.classList.toggle("danger", danger);
   }
 
-  return { request, currentUser, requireUser, showMessage };
-})();
+  function formatDateTime(value) {
+    if (!value) return "—";
+    return new Intl.DateTimeFormat("es-MX", {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }).format(new Date(value));
+  }
 
+  function localDateTimeInput(value = new Date()) {
+    const date = value instanceof Date ? value : new Date(value);
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, 16);
+  }
+
+  function interactionLabel(value) {
+    return ({
+      llamada: "Llamada",
+      correo: "Correo",
+      reunion: "Reunión",
+      otro: "Otro"
+    })[value] || value;
+  }
+
+  function initials(value) {
+    return String(value || "CA")
+      .trim()
+      .split(/\s+/)
+      .slice(0, 2)
+      .map(part => part[0])
+      .join("")
+      .toUpperCase();
+  }
+
+  return {
+    request,
+    currentUser,
+    requireUser,
+    showMessage,
+    formatDateTime,
+    localDateTimeInput,
+    interactionLabel,
+    initials
+  };
+})();

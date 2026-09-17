@@ -23,28 +23,72 @@
     <div id="dashboardMsg" class="notice" hidden></div>
 
     <section class="grid">
-      <article class="card crm-stat" style="grid-column:span 4">
+      <article class="card crm-stat" style="grid-column:span 3">
         <span class="small">Total de clientes</span>
         <strong id="totalClients">0</strong>
+        <small>Directorio vigente</small>
       </article>
-      <article class="card crm-stat" style="grid-column:span 4">
+      <article class="card crm-stat" style="grid-column:span 3">
         <span class="small">Clientes activos</span>
         <strong id="activeClients">0</strong>
+        <small id="activePercent">0% del total</small>
       </article>
-      <article class="card crm-stat" style="grid-column:span 4">
-        <span class="small">Clientes inactivos</span>
-        <strong id="inactiveClients">0</strong>
+      <article class="card crm-stat" style="grid-column:span 3">
+        <span class="small">Interacciones este mes</span>
+        <strong id="monthInteractions">0</strong>
+        <small>Seguimientos registrados</small>
+      </article>
+      <article class="card crm-stat is-warning" style="grid-column:span 3">
+        <span class="small">Sin interacción reciente</span>
+        <strong id="riskClients">0</strong>
+        <small id="riskDaysLabel">Últimos 30 días</small>
+      </article>
+    </section>
+
+    <section class="crm-dashboard-grid">
+      <article class="card">
+        <div class="crm-card-heading">
+          <div>
+            <span class="eyebrow">ESTADO DE LA CARTERA</span>
+            <h2 style="margin-top:8px">Activos e inactivos</h2>
+          </div>
+        </div>
+        <div class="crm-donut-layout">
+          <div id="statusDonut" class="crm-donut">
+            <div class="crm-donut-value"><strong id="statusPercent">0%</strong><small>activos</small></div>
+          </div>
+          <div class="crm-legend">
+            <div class="crm-legend-item"><span class="crm-legend-dot" style="--legend-color:var(--forest)"></span><span>Activos</span><b id="legendActive">0</b></div>
+            <div class="crm-legend-item"><span class="crm-legend-dot" style="--legend-color:#ee873f"></span><span>Inactivos</span><b id="legendInactive">0</b></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="crm-card-heading">
+          <div>
+            <span class="eyebrow">SEGUIMIENTO PRIORITARIO</span>
+            <h2 style="margin-top:8px">Clientes en riesgo</h2>
+          </div>
+          <a class="btn" href="reportes.html">Ver métricas</a>
+        </div>
+        <div id="riskList" class="crm-risk-list">
+          <div class="crm-empty">Cargando seguimiento…</div>
+        </div>
       </article>
     </section>
 
     <section class="card" style="margin-top:24px">
-      <div class="row" style="align-items:flex-end;flex-wrap:wrap">
+      <div class="crm-card-heading">
         <div>
-          <span class="eyebrow">PRIMER MÓDULO DISPONIBLE</span>
-          <h2 style="margin:8px 0">Directorio de clientes</h2>
-          <p style="margin:0">Registra, busca, clasifica y actualiza la etapa de cada relación.</p>
+          <span class="eyebrow">ACCESOS DE TRABAJO</span>
+          <h2 style="margin-top:8px">Continúa el seguimiento</h2>
         </div>
-        <a class="btn primary" href="clientes.html">Abrir clientes <span data-icon="arrow"></span></a>
+      </div>
+      <div class="grid">
+        <a class="card" style="grid-column:span 4" href="clientes.html"><b>Clientes</b><p style="margin:6px 0 0">Consulta datos, etapas e historial.</p></a>
+        <a class="card" style="grid-column:span 4" href="interacciones.html"><b>Interacciones</b><p style="margin:6px 0 0">Revisa los contactos registrados.</p></a>
+        <a class="card" style="grid-column:span 4" href="actividad.html"><b>Mi actividad</b><p style="margin:6px 0 0">Filtra tu trabajo por fecha.</p></a>
       </div>
     </section>
   </main>
@@ -56,4 +100,3 @@
   <script src="../js/crm_dashboard.js"></script>
 </body>
 </html>
-

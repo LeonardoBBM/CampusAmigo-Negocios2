@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusAmigo CRM | Usuarios</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/crm.css">
+</head>
+<body>
+  <header></header>
+  <main id="main-content" class="container">
+    <div class="crm-welcome">
+      <div>
+        <span class="eyebrow">CRM / ADMINISTRACIÓN</span>
+        <h1 style="margin:10px 0 8px">Usuarios</h1>
+        <p style="margin:0">Administra quién puede ingresar y qué rol tiene dentro del CRM.</p>
+      </div>
+      <button id="openUserForm" class="btn primary" type="button">+ Nuevo usuario</button>
+    </div>
+    <div id="userMsg" class="notice" hidden></div>
+    <div id="userAdminContent">
+      <section class="card">
+        <div class="crm-card-heading"><div><span class="eyebrow">ACCESO Y ROLES</span><h2 style="margin-top:8px">Equipo CRM</h2></div><span id="userCount" class="pill">0 usuarios</span></div>
+        <table class="table">
+          <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th><th>Registro</th><th class="right">Acción</th></tr></thead>
+          <tbody id="userRows"><tr><td colspan="6" class="small">Cargando usuarios…</td></tr></tbody>
+        </table>
+      </section>
+      <section id="userFormCard" class="card" style="margin-top:24px" hidden>
+        <div class="crm-card-heading"><div><span class="eyebrow">NUEVO ACCESO</span><h2 style="margin-top:8px">Registrar usuario</h2></div></div>
+        <form id="userForm" class="crm-form-grid">
+          <div class="field"><label for="userName">Nombre</label><input id="userName" class="input" minlength="2" maxlength="100" required></div>
+          <div class="field"><label for="userEmail">Correo</label><input id="userEmail" class="input" type="email" required></div>
+          <div class="field"><label for="userRole">Rol</label><select id="userRole"><option value="user">Usuario</option><option value="admin">Administrador</option></select></div>
+          <div class="field"><label for="userPassword">Contraseña temporal</label><input id="userPassword" class="input" type="password" minlength="8" maxlength="128" required autocomplete="new-password"></div>
+          <div class="crm-form-actions span-2"><button id="cancelUser" class="btn" type="button">Cancelar</button><button id="saveUser" class="btn primary" type="submit">Crear usuario</button></div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/crm_api.js"></script>
+  <script src="../js/crm_nav.js"></script>
+  <script src="../js/crm_usuarios.js"></script>
+</body>
+</html>

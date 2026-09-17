@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusAmigo CRM | Mi actividad</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/crm.css">
+</head>
+<body>
+  <header></header>
+  <main id="main-content" class="container">
+    <div class="crm-welcome">
+      <div>
+        <span class="eyebrow">CRM / RESPONSABILIDAD INDIVIDUAL</span>
+        <h1 style="margin:10px 0 8px">Mi actividad</h1>
+        <p style="margin:0">Revisa únicamente las interacciones que quedaron registradas a tu nombre.</p>
+      </div>
+      <span id="activityUser" class="pill">—</span>
+    </div>
+    <div id="activityMsg" class="notice" hidden></div>
+    <section class="card">
+      <div class="crm-toolbar">
+        <div class="crm-toolbar-filters">
+          <div class="field"><label for="activityFrom">Desde</label><input id="activityFrom" class="input" type="date"></div>
+          <div class="field"><label for="activityUntil">Hasta</label><input id="activityUntil" class="input" type="date"></div>
+          <div class="field"><label for="activityType">Tipo</label><select id="activityType"><option value="">Todos</option><option value="llamada">Llamada</option><option value="correo">Correo</option><option value="reunion">Reunión</option><option value="otro">Otro</option></select></div>
+        </div>
+        <span id="activityCount" class="pill">0 actividades</span>
+      </div>
+      <table class="table" style="margin-top:18px">
+        <thead><tr><th>Fecha</th><th>Cliente</th><th>Tipo</th><th>Descripción</th><th class="right">Expediente</th></tr></thead>
+        <tbody id="activityRows"><tr><td colspan="5" class="small">Cargando actividad…</td></tr></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/crm_api.js"></script>
+  <script src="../js/crm_nav.js"></script>
+  <script src="../js/crm_actividad.js"></script>
+</body>
+</html>

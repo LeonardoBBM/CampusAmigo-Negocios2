@@ -5,7 +5,12 @@ const { config } = require("./config");
 const { createAuthMiddleware } = require("./middleware/auth");
 const { createAuthRouter } = require("./routes/auth");
 const { createClientsRouter } = require("./routes/clients");
+const { createEvaluationsRouter } = require("./routes/evaluations");
 const { createHealthRouter } = require("./routes/health");
+const { createInteractionsRouter } = require("./routes/interactions");
+const { createMetricsRouter } = require("./routes/metrics");
+const { createSettingsRouter } = require("./routes/settings");
+const { createUsersRouter } = require("./routes/users");
 
 function rootHtmlPages(projectRoot) {
   return new Set(
@@ -42,7 +47,17 @@ function createApp({ db, projectRoot = config.projectRoot, setupToken = null }) 
   app.use("/api", createHealthRouter({ db }));
   app.use("/api", createAuthRouter({ db, auth, setupToken }));
   app.use("/api", createClientsRouter({ db, auth }));
+  app.use("/api", createInteractionsRouter({ db, auth }));
+  app.use("/api", createEvaluationsRouter({ db, auth }));
+  app.use("/api", createMetricsRouter({ db, auth }));
+  app.use("/api", createUsersRouter({ db, auth }));
+  app.use("/api", createSettingsRouter({ db, auth }));
   app.use(createClientsRouter({ db, auth }));
+  app.use(createInteractionsRouter({ db, auth }));
+  app.use(createEvaluationsRouter({ db, auth }));
+  app.use(createMetricsRouter({ db, auth }));
+  app.use(createUsersRouter({ db, auth }));
+  app.use(createSettingsRouter({ db, auth }));
 
   const staticOptions = { index: false, dotfiles: "deny" };
   app.use("/assets", express.static(path.join(projectRoot, "assets"), {

@@ -59,9 +59,41 @@ function positiveInteger(value, field) {
   return normalized;
 }
 
+function integerInRange(value, field, { min, max }) {
+  const normalized = Number.parseInt(value, 10);
+  if (!Number.isInteger(normalized) || normalized < min || normalized > max) {
+    throw new ApiError(400, `El campo ${field} debe ser un entero entre ${min} y ${max}.`);
+  }
+  return normalized;
+}
+
+function isoDateTime(value, field = "fecha") {
+  const normalized = requiredText(value, field, { min: 10, max: 40 });
+  const date = new Date(normalized);
+  if (Number.isNaN(date.getTime())) {
+    throw new ApiError(400, `El campo ${field} debe contener una fecha válida.`);
+  }
+  return date.toISOString();
+}
+
+function dateOnly(value, field) {
+  const normalized = requiredText(value, field, { min: 10, max: 10 });
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) {
+    throw new ApiError(400, `El campo ${field} debe usar el formato AAAA-MM-DD.`);
+  }
+  const date = new Date(`${normalized}T00:00:00.000Z`);
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== normalized) {
+    throw new ApiError(400, `El campo ${field} debe contener una fecha válida.`);
+  }
+  return normalized;
+}
+
 module.exports = {
+  dateOnly,
   requiredText,
   email,
+  integerInRange,
+  isoDateTime,
   password,
   optionalText,
   oneOf,

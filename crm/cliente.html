@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusAmigo CRM | Detalle del cliente</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/crm.css">
+</head>
+<body>
+  <header></header>
+  <main id="main-content" class="container">
+    <a class="small" href="clientes.html">← Volver a clientes</a>
+    <div id="clientDetailMsg" class="notice" style="margin-top:18px" hidden></div>
+
+    <section id="clientSummary" class="card crm-detail-card" style="margin-top:18px">
+      <div id="clientAvatar" class="crm-avatar-large">—</div>
+      <div>
+        <span class="eyebrow">EXPEDIENTE CENTRALIZADO</span>
+        <div class="crm-detail-title" style="margin-top:8px">
+          <h1 id="clientTitle">Cargando cliente…</h1>
+          <span id="clientStatus" class="pill">—</span>
+          <span id="clientStageBadge" class="crm-stage-badge">—</span>
+        </div>
+        <p id="clientSubtitle" style="margin:8px 0 0">—</p>
+      </div>
+      <div class="crm-detail-actions">
+        <a id="editClient" class="btn" href="clientes.html">Editar cliente</a>
+        <label class="sr-only" for="detailStage">Cambiar etapa CRM</label>
+        <select id="detailStage" class="crm-stage-select">
+          <option value="Prospecto">Prospecto</option>
+          <option value="Activo">Activo</option>
+          <option value="Frecuente">Frecuente</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="crm-tabs" role="tablist" aria-label="Información del cliente">
+      <button class="crm-tab" type="button" role="tab" aria-selected="true" aria-controls="clientInfoPanel" data-tab="clientInfoPanel">Información</button>
+      <button class="crm-tab" type="button" role="tab" aria-selected="false" aria-controls="clientInteractionsPanel" data-tab="clientInteractionsPanel">Interacciones</button>
+      <button class="crm-tab" type="button" role="tab" aria-selected="false" aria-controls="clientEvaluationsPanel" data-tab="clientEvaluationsPanel">Evaluaciones</button>
+    </div>
+
+    <section id="clientInfoPanel" class="card" role="tabpanel">
+      <div class="crm-card-heading">
+        <div>
+          <span class="eyebrow">INFORMACIÓN COMPLETA</span>
+          <h2 style="margin-top:8px">Datos del cliente</h2>
+        </div>
+      </div>
+      <div id="clientInfo" class="crm-detail-grid">
+        <div class="crm-empty" style="grid-column:1 / -1">Cargando información…</div>
+      </div>
+    </section>
+
+    <section id="clientInteractionsPanel" class="card" role="tabpanel" hidden>
+      <div class="crm-card-heading">
+        <div>
+          <span class="eyebrow">HISTORIAL CENTRALIZADO</span>
+          <h2 style="margin-top:8px">Línea de tiempo</h2>
+        </div>
+        <button id="openInteraction" class="btn primary" type="button">+ Nueva interacción</button>
+      </div>
+      <div id="interactionTimeline" class="crm-timeline">
+        <div class="crm-empty">Cargando interacciones…</div>
+      </div>
+    </section>
+
+    <section id="clientEvaluationsPanel" class="card" role="tabpanel" hidden>
+      <div class="crm-card-heading">
+        <div>
+          <span class="eyebrow">EVALUACIÓN DE LA RELACIÓN</span>
+          <h2 style="margin-top:8px">Evaluaciones</h2>
+        </div>
+      </div>
+      <form id="evaluationForm" class="crm-form-grid" style="margin-bottom:24px">
+        <div class="field">
+          <label for="evaluationScore">Calificación</label>
+          <select id="evaluationScore" required>
+            <option value="5">5 - Excelente</option>
+            <option value="4">4 - Buena</option>
+            <option value="3">3 - Regular</option>
+            <option value="2">2 - Baja</option>
+            <option value="1">1 - Crítica</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="evaluationDate">Fecha</label>
+          <input id="evaluationDate" class="input" type="datetime-local" required>
+        </div>
+        <div class="field span-2">
+          <label for="evaluationComment">Comentario</label>
+          <textarea id="evaluationComment" rows="3" maxlength="2000" placeholder="Describe la calidad actual de la relación"></textarea>
+        </div>
+        <div class="crm-form-actions span-2" style="margin-top:0">
+          <button id="saveEvaluation" class="btn primary" type="submit">Guardar evaluación</button>
+        </div>
+      </form>
+      <div id="evaluationList" class="crm-evaluation-list"></div>
+    </section>
+  </main>
+
+  <dialog id="interactionDialog" class="crm-dialog">
+    <div class="crm-dialog-inner">
+      <div class="crm-dialog-heading">
+        <div>
+          <span class="eyebrow">SEGUIMIENTO</span>
+          <h2>Nueva interacción</h2>
+        </div>
+        <button id="closeInteraction" class="crm-dialog-close" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <form id="interactionForm" class="crm-form-grid">
+        <div class="field">
+          <label for="interactionType">Tipo de interacción</label>
+          <select id="interactionType" required>
+            <option value="llamada">Llamada</option>
+            <option value="correo">Correo</option>
+            <option value="reunion">Reunión</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="interactionResponsible">Responsable</label>
+          <select id="interactionResponsible" required></select>
+        </div>
+        <div class="field span-2">
+          <label for="interactionDescription">Descripción</label>
+          <textarea id="interactionDescription" rows="5" minlength="3" maxlength="2000" required placeholder="¿Qué se acordó o qué seguimiento necesita?"></textarea>
+        </div>
+        <div class="field span-2">
+          <label for="interactionDate">Fecha</label>
+          <input id="interactionDate" class="input" type="datetime-local" required>
+        </div>
+        <div class="crm-form-actions span-2">
+          <button id="cancelInteraction" class="btn" type="button">Cancelar</button>
+          <button id="saveInteraction" class="btn primary" type="submit">Guardar interacción</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/crm_api.js"></script>
+  <script src="../js/crm_nav.js"></script>
+  <script src="../js/crm_cliente.js"></script>
+</body>
+</html>

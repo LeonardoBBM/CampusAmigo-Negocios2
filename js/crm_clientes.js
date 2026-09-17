@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   let clients = [];
   let editingId = null;
   let debounce;
+  let requestedEditHandled = false;
+
+  function stageClass(value) {
+    return `stage-${String(value).toLowerCase()}`;
+  }
 
   function stageOptions(selected) {
     return ["Prospecto", "Activo", "Frecuente", "Inactivo"]
@@ -65,13 +70,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td><div class="crm-person"><span>${UI.escape(client.empresa || "—")}</span><small>${UI.escape(client.telefono || "Sin teléfono")}</small></div></td>
         <td><span class="pill">${UI.escape(client.estado)}</span></td>
         <td>
-          <select class="crm-stage-select" data-stage="${client.id}" aria-label="Etapa CRM de ${UI.escape(client.nombre)}">
+          <select class="crm-stage-select ${stageClass(client.etapa_crm)}" data-stage="${client.id}" aria-label="Etapa CRM de ${UI.escape(client.nombre)}">
             ${stageOptions(client.etapa_crm)}
           </select>
         </td>
         <td class="small">${new Date(client.fecha_registro).toLocaleDateString("es-MX")}</td>
         <td class="right">
-          ${user.role === "admin" ? `<button class="btn" data-edit="${client.id}">Editar</button> <button class="btn danger outline" data-delete="${client.id}">Eliminar</button>` : '<span class="small">Consulta</span>'}
+          <div class="crm-inline-actions">
+            <a class="btn" href="cliente.html?id=${client.id}">Ver</a>
+            ${user.role === "admin" ? `<button class="btn" data-edit="${client.id}">Editar</button><button class="btn danger outline" data-delete="${client.id}">Eliminar</button>` : ""}
+          </div>
         </td>
       </tr>`).join("");
   }
@@ -88,6 +96,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       count.dataset.total = result.pagination.total;
       render();
       message.hidden = true;
+      if (!requestedEditHandled && user.role === "admin") {
+        const requestedId = Number(new URLSearchParams(location.search).get("edit"));
+        const requestedClient = clients.find(client => client.id === requestedId);
+        if (requestedClient) openForm(requestedClient);
+        requestedEditHandled = true;
+      }
     } catch (error) {
       CRM.showMessage(message, error.message, true);
     }
@@ -161,6 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         method: "PUT",
         body: { etapa_crm: select.value }
       });
+      select.className = `crm-stage-select ${stageClass(select.value)}`;
       UI.toast("Etapa CRM actualizada");
     } catch (error) {
       CRM.showMessage(message, error.message, true);
@@ -174,4 +189,3 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   [status, stage].forEach(element => element.addEventListener("change", loadClients));
 });
-

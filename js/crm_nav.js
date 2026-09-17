@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   try { user = await CRM.currentUser(); } catch { }
 
   const current = location.pathname.split("/").pop() || "index.html";
+  const isCurrent = href => current === href || (href === "clientes.html" && current === "cliente.html");
   const link = (href, label) =>
-    `<a href="${href}"${current === href ? ' aria-current="page"' : ""}>${label}</a>`;
+    `<a href="${href}"${isCurrent(href) ? ' aria-current="page"' : ""}>${label}</a>`;
+  const secondaryPages = ["evaluaciones.html", "actividad.html", "usuarios.html", "configuracion.html"];
+  const secondaryActive = secondaryPages.includes(current);
 
   header.innerHTML = `
     <div class="nav">
@@ -17,7 +20,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         <nav class="links" aria-label="Navegación CRM">
           ${link("index.html", "Resumen")}
           ${link("clientes.html", "Clientes")}
-          <a href="../index.html">Ver marketplace</a>
+          ${link("interacciones.html", "Interacciones")}
+          ${link("reportes.html", "Reportes")}
+          <details class="nav-more">
+            <summary${secondaryActive ? ' aria-current="page"' : ""}>Más ${UI.icon("chevron")}</summary>
+            <div class="nav-more-menu">
+              ${link("evaluaciones.html", "Evaluaciones")}
+              ${link("actividad.html", "Mi actividad")}
+              ${user?.role === "admin" ? link("usuarios.html", "Usuarios") : ""}
+              ${user?.role === "admin" ? link("configuracion.html", "Configuración") : ""}
+              <a href="../index.html">Ver marketplace</a>
+            </div>
+          </details>
         </nav>
         <div class="actions">
           ${user
@@ -40,4 +54,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     location.href = "login.html";
   });
 });
-
